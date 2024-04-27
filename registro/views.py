@@ -7,7 +7,8 @@ from .models import *
 # Create your views here.
 def index(request):
     miembros = Miembro.objects.all()
-    return render(request, 'registro/inicio/index.html', {'miembros': miembros})
+    return render(request, 'registro/inicio.html', {'miembros': miembros})
 
 def gestionar_misiones(request):
-    return HttpResponse('yeap')
+    misiones = Mision.objects.all()
+    return render(request, 'registro/misiones.html', {'misiones': misiones})

@@ -1,0 +1,40 @@
+{% extends 'registro/base.html' %}
+
+<head>
+  {% block head %}
+    <link rel="stylesheet" href="static/css/misiones.css">
+  {% endblock %}
+</head>
+
+{% block content %}
+<table>
+    <thead>
+    <tr>
+      <th class='columna_id'>ID</th>
+      <th class='columna_nombre'>Nombre</th>
+      <th class='columna_lider'>Lider</th>
+      <th class='columna_n_miembros'>N. Miembros</th>
+      <th class='columna_fecha_inicio'>Fecha de inicio</th>
+      <th class='columna_fecha_finalizacion'>Fecha de finalizacion</th>
+      <th class='columna_acciones'>Acciones</th>
+    </tr>
+    </thead>
+  <tbody>
+    {% for mision in misiones %}
+    <tr>
+      <td class='celda_id'>{{ mision.pk }}</td>
+      <td class='celda_nombre'>{{ mision.nombre }}</td>
+      <td class='celda_lider'>{{ mision.lider.nombre }}</td>
+      <td class='celda_n_miembros'>{{ mision.miembro_set.count }}</td>
+      <td class='celda_fecha_inicio'>{{ mision.fecha_inicio }}</td>
+      <td class='celda_fecha_finalizacion'>{{ mision.fecha_finalizacion }}</td>
+      <td class='celda_acciones'>
+        <button>Editar</button>
+        <button>Eliminar</button>
+      </td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+{% endblock %}

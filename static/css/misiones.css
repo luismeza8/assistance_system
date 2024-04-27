@@ -1,6 +1,7 @@
 table {
   background-color: lightgrey;
   overflow-y: auto;
+  overflow-x: auto;
   width: 100%;
   table-layout: fixed;
   border-radius: 8px;
@@ -20,20 +21,23 @@ td {
   width: 60px;
 }
 
-.columna_nombre {
-  width: 40%;
-  text-align: left;
+.columna_n_miembros,
+.columna_acciones,
+.columna_nombre,
+.columna_fecha_inicio,
+.columna_fecha_finalizacion {
+  width: 12%;
 }
 
-.columna_acciones {
-  width: 10%;
-}
-
-.celda_misiones,
-.celda_subsistemas,
 .celda_id,
+.celda_n_miembros,
+.celda_fecha_inicio,
+.celda_fecha_finalizacion,
+.celda_nombre,
 .celda_acciones {
   text-align: center;
 }
 
-
+.columna_lider {
+  text-align: left;
+}
