@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis miembros y misiones</title>
+    <link rel="stylesheet" href="static/css/inicio.css">
+</head>
+  <body>
+    <header>
+      <h1>Aplicación de Gestión</h1>
+    </header>
+
+    <aside>
+      <ul>
+        <li>Inicio</li>
+      </ul>
+    </aside>
+
+    <div class='container'>
+      <table>
+        <thead>
+        <tr>
+          <th class='columna_id'>ID</th>
+          <th class='columna_nombre'>Nombre</th>
+          <th class='columna_subsistemas'>Subsistemas</th>
+          <th class='columna_misiones'>Misiones</th>
+          <th class='columna_acciones'>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+          {% for miembro in miembros %}
+          <tr>
+            <td class='celda_id'>{{ miembro.pk }}</td>
+            <td>{{ miembro.nombre }}</td>
+            <td class='celda_misiones'>
+              {% for mision in miembro.mision.all %}
+                {{ mision.nombre }}{% if not forloop.last %}, {% endif %}
+              {% endfor %}
+            </td>
+            <td class='celda_subsistemas'>
+              {% for subsistema in miembro.subsistema.all %}
+                {{ subsistema.nombre }}{% if not forloop.last %}, {% endif %}
+              {% endfor %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+        
+    </div>
+
+  </body>
+</html>
+

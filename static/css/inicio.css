@@ -1,0 +1,67 @@
+body {
+  margin: 0px;
+  margin: none;
+  height: 100vh;
+  background-color: white;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: 80px 1fr;
+}
+
+header {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  background-color: #1E1D4F;
+  color: white;
+}
+
+header h1 {
+  margin-left: 10px;
+}
+
+aside {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  background-color: #1E1D3A;
+  color: white;
+}
+
+table {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  margin: 8px;
+  background-color: lightgrey;
+  overflow-y: auto;
+  border-collapse: collapse;
+  width: 99%;
+  table-layout: fixed;
+}
+
+th {
+  height: 20px;
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+td {
+  height: 60px;
+}
+
+.columna_id {
+  width: 80px;
+}
+
+.columna_nombre {
+  width: 40%;
+  text-align: left;
+}
+
+.columna_acciones {
+  width: 10%;
+}
+
+.celda_misiones, .celda_subsistemas, .celda_id {
+  text-align: center;
+}
+
+
