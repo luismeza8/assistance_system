@@ -12,6 +12,10 @@
 </head>
   <body>
     {% block content %}
+    <div class='above_table'>
+      <h3>Total de miembros: {{ miembros.count }}</h3>
+      <button class='agregar_miembro'>Agregar miembro</button>
+    </div>
       <table>
         <thead>
         <tr>

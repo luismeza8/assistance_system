@@ -6,6 +6,19 @@ table {
   border-radius: 8px;
 }
 
+.above_table {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 4px;
+}
+
+.agregar_miembro {
+  margin: 12px 0px;
+  border-radius: 8px;
+  padding: 8px;
+}
+
 th {
   height: 20px;
   border: 1px solid #ddd;
