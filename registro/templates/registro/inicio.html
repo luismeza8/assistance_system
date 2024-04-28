@@ -14,7 +14,9 @@
     {% block content %}
     <div class='above_table'>
       <h3>Total de miembros: {{ miembros.count }}</h3>
-      <button class='agregar_miembro'>Agregar miembro</button>
+      <a href='{% url 'agregar_miembro' %}'>
+        <button class='agregar_miembro'>Agregar miembro</button>
+      </a>
     </div>
       <table>
         <thead>

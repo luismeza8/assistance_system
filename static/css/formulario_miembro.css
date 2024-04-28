@@ -1,0 +1,51 @@
+.content {
+  margin: 30px 30px;
+  display: flex;
+  flex-direction: vertical;
+}
+
+.checkboxes_container {
+  display: flex;
+  flex-direction: horizontal;
+  justify-content: space-between;
+  width: 80%;
+  margin-bottom: 60px;
+}
+
+.nombre {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  margin-bottom: 60px;
+}
+
+form {
+  width: 40%;
+}
+
+.label_form {
+  margin: 12px 0;
+  display: block;
+  font-size: 20px;
+}
+
+.btn_guardar {
+  width: 100%;
+  padding: 10px;
+  margin: 20px 0;
+  margin-left: 10px;
+  border-radius: 8px;
+}
+
+.checkbox_list label {
+  display: block;
+  margin-bottom: 4px;
+  flex: 1;
+}
+
+.checkbox_list input[type="checkbox"] {
+  vertical-align: middle;
+  flex: 2;
+}
+

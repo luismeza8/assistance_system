@@ -1,0 +1,24 @@
+{% extends 'registro/base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="static/css/formulario_miembro.css">
+{% endblock %}
+
+{% block content %}
+<div class='content'>
+  <form method="post">
+      {% csrf_token %}
+
+      <label for='{{ form.nombre.id_for_label }}' class='label_form'>Nombre: </label>
+      {{ form.nombre }}
+      <div class='checkboxes_container'>
+        <label for='{{ form.mision.id_for_label }}' class='label_form'>Mision: </label>
+        {{ form.mision }}
+        <label for='{{ form.mision.id_for_label }}' class='label_form'>Subsistema: </label>
+        {{ form.subsistema }}
+      </div>
+
+      <button type="submit" class='btn_guardar'>Guardar</button>
+  </form>
+</div>
+{% endblock %}
