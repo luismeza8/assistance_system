@@ -8,6 +8,10 @@ body {
   grid-template-rows: 80px 1fr;
 }
 
+img {
+  margin: 25px 0 24px 25px;
+}
+
 header {
   grid-column: 2 / 3;
   grid-row: 1 / 2;
@@ -16,6 +20,17 @@ header {
 
 header h1 {
   margin-left: 10px;
+}
+
+li {
+  list-style-type: none;
+  font-size: 20px;
+  margin-bottom: 24px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
 }
 
 aside {

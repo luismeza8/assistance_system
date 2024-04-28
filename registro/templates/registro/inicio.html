@@ -44,8 +44,10 @@
               {% endfor %}
             </td>
             <td class='celda_acciones'>
-              <button>Editar</button>
-              <button>Eliminar</button>
+              <a href='{% url 'editar_miembro' miembro.pk %}'>
+                <button>Editar</button>
+              </a>
+                <button>Eliminar</button>
             </td>
           </tr>
           {% endfor %}

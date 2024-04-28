@@ -25,3 +25,16 @@ def agregar_miembro(request):
         form = MiembroForm()
     return render(request, 'registro/formulario_miembro.html', {'form': form})
 
+
+def editar_miembro(request, primary_key):
+    miembro = Miembro.objects.get(pk=primary_key)
+    form = MiembroForm(instance=miembro)
+
+    if request.method == 'POST':
+        form = MiembroForm(request.POST, instance=miembro)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+
+    return render(request, 'registro/formulario_miembro.html', {'form': form})
+
