@@ -23,8 +23,8 @@
         <tr>
           <th class='columna_id'>ID</th>
           <th class='columna_nombre'>Nombre</th>
-          <th class='columna_subsistemas'>Subsistemas</th>
           <th class='columna_misiones'>Misiones</th>
+          <th class='columna_subsistemas'>Subsistemas</th>
           <th class='columna_acciones'>Acciones</th>
         </tr>
         </thead>
@@ -47,7 +47,9 @@
               <a href='{% url 'editar_miembro' miembro.pk %}'>
                 <button>Editar</button>
               </a>
+              <a href='{% url 'eliminar_miembro' miembro.pk %}'>
                 <button>Eliminar</button>
+              </a>
             </td>
           </tr>
           {% endfor %}

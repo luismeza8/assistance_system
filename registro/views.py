@@ -5,7 +5,6 @@ from django.template import loader
 from .models import *
 from .forms import *
 
-# Create your views here.
 def index(request):
     miembros = Miembro.objects.all()
     return render(request, 'registro/inicio.html', {'miembros': miembros})
@@ -14,6 +13,7 @@ def index(request):
 def gestionar_misiones(request):
     misiones = Mision.objects.all()
     return render(request, 'registro/misiones.html', {'misiones': misiones})
+
 
 def agregar_miembro(request):
     if request.method == 'POST':
@@ -38,3 +38,12 @@ def editar_miembro(request, primary_key):
 
     return render(request, 'registro/formulario_miembro.html', {'form': form})
 
+
+def eliminar_miembro(request, primary_key):
+    miembro = Miembro.objects.get(pk=primary_key)
+    
+    if request.method == 'POST':
+        miembro.delete()
+        return redirect('index')
+
+    return render(request, 'registro/eliminar_miembro.html', {'miembro': miembro})
