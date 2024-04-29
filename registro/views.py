@@ -59,3 +59,15 @@ def agregar_mision(request):
         form = MisionForm()
     return render(request, 'registro/formulario_misiones.html', {'form': form})
 
+
+def editar_mision(request, primary_key):
+    mision = Mision.objects.get(pk=primary_key)
+    form = MisionForm(instance=mision)
+
+    if request.method == 'POST':
+        form = MisionForm(request.POST, instance=mision)
+        if form.is_valid():
+            form.save()
+            return redirect('misiones')
+    
+    return render(request, 'registro/formulario_misiones.html', {'form': form})

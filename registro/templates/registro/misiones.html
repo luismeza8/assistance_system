@@ -36,7 +36,9 @@
       <td class='celda_fecha_inicio'>{{ mision.fecha_inicio }}</td>
       <td class='celda_fecha_finalizacion'>{{ mision.fecha_finalizacion }}</td>
       <td class='celda_acciones'>
-        <button>Editar</button>
+        <a href='{% url 'editar_mision' mision.pk %}'>
+          <button>Editar</button>
+        </a>
         <button>Eliminar</button>
       </td>
     </tr>
