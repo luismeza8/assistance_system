@@ -9,7 +9,7 @@
   flex-direction: horizontal;
   justify-content: space-between;
   width: 80%;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .nombre {
@@ -17,11 +17,16 @@
   padding: 10px;
   border-radius: 8px;
   border: 2px solid #ccc;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 form {
   width: 40%;
+}
+
+#id_mision.checkbox_list,
+#id_subsistema.checkbox_list {
+  margin-top: 12px;
 }
 
 .label_form {

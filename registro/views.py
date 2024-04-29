@@ -47,3 +47,15 @@ def eliminar_miembro(request, primary_key):
         return redirect('index')
 
     return render(request, 'registro/eliminar_miembro.html', {'miembro': miembro})
+
+
+def agregar_mision(request):
+    if request.method == 'POST':
+        form = MisionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('misiones')
+    else:
+        form = MisionForm()
+    return render(request, 'registro/formulario_misiones.html', {'form': form})
+

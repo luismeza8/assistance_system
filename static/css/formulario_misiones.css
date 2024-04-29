@@ -1,0 +1,63 @@
+.content {
+  margin: 30px 30px;
+  display: flex;
+  flex-direction: vertical;
+}
+
+.select, .nombre, .label_form {
+  display: block;
+}
+
+.calendarios {
+  display: flex;
+  flex-direction: horizontal;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  width: 104%;
+}
+
+form {
+  width: 40%;
+}
+
+.nombre {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  margin-bottom: 40px;
+}
+
+.label_form {
+  margin: 12px 0;
+  display: block;
+  font-size: 18px;
+}
+
+#id_fecha_inicio, #id_fecha_finalizacion {
+  height: 24px;
+  margin-top: 6px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  height: 28px;
+  padding: 0 4px 0 4px;
+}
+
+#id_lider {
+  height: 34px;
+  width: 104%;
+  margin-bottom: 40px;
+  height: 46px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  background-color: white;
+  padding-left: 10px;
+}
+
+.btn_guardar {
+  width: 104%;
+  padding: 10px;
+  margin: 20px 0;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+}

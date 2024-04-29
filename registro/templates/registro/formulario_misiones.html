@@ -1,0 +1,29 @@
+{% extends 'registro/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/formulario_misiones.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class='content'>
+  <form method='POST'>
+    {% csrf_token %}
+
+    <label for='{{ form.nombre.id_for_label }}' class='label_form'>Nombre de la mision: </label>
+    {{ form.nombre }}
+
+    <label for='{{ form.lider.id_for_label }}' class='label_form'>Lider de la mision: </label>
+    {{ form.lider }}
+
+    <div class='calendarios'>
+      <label for='{{ form.fecha_inicio.id_for_label }}' class='label_form'>Fecha de inicio: </label>
+      {{ form.fecha_inicio }}
+      <label for='{{ form.fecha_finalizacion.id_for_label }}' class='label_form'>Fecha de finalizacion: </label>
+      {{ form.fecha_finalizacion }}
+    </div>
+
+    <button type="submit" class='btn_guardar'>Guardar</button>
+  </form>
+</div>
+{% endblock %}
