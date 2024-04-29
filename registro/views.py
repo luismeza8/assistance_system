@@ -71,3 +71,14 @@ def editar_mision(request, primary_key):
             return redirect('misiones')
     
     return render(request, 'registro/formulario_misiones.html', {'form': form})
+
+
+def eliminar_mision(request, primary_key):
+    mision = Mision.objects.get(pk=primary_key)
+
+    if request.method == 'POST':
+        mision.delete()
+        return redirect('misiones')
+
+    return render(request, 'registro/eliminar_mision.html', {'mision': mision})
+

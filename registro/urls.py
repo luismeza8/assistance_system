@@ -10,4 +10,5 @@ urlpatterns = [
     path('eliminar_miembro/<int:primary_key>', views.eliminar_miembro, name='eliminar_miembro'),
     path('agregar_mision', views.agregar_mision, name='agregar_mision'),
     path('editar_mision/<int:primary_key>', views.editar_mision, name='editar_mision'),
+    path('eliminar_mision/<int:primary_key>', views.eliminar_mision, name='eliminar_mision'),
 ]

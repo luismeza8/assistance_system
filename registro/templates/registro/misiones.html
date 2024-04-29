@@ -39,7 +39,9 @@
         <a href='{% url 'editar_mision' mision.pk %}'>
           <button>Editar</button>
         </a>
-        <button>Eliminar</button>
+        <a href='{% url 'eliminar_mision' mision.pk %}'>
+          <button>Eliminar</button>
+        </a>
       </td>
     </tr>
     {% endfor %}
