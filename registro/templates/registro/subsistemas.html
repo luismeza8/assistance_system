@@ -1,0 +1,43 @@
+{% extends 'registro/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel='stylesheet' href='{% static 'css/subsistemas.css' %}'>
+{% endblock %}
+
+{% block content %}
+<div class='above_table'>
+  <h3>Total de subsistemas: {{ subsistemas.count }}</h3>
+  <a href='{% url 'agregar_subsistema' %}'>
+    <button class='agregar_subsistema'>Agregar subsistema</button>
+  </a>
+</div>
+<table>
+    <thead>
+    <tr>
+      <th class='columna_id'>ID</th>
+      <th class='columna_nombre'>Nombre</th>
+      <th class='columna_lider'>Lider</th>
+      <th class='columna_acciones'>Acciones</th>
+    </tr>
+    </thead>
+  <tbody>
+    {% for subsistema in subsistemas %}
+    <tr>
+      <td class='celda_id'>{{ subsistema.pk }}</td>
+      <td class='celda_nombre'>{{ subsistema.nombre }}</td>
+      <td class='celda_lider'>{{ subsistema.lider.nombre }}</td>
+      <td class='celda_acciones'>
+        <a href='{% url 'editar_mision' subsistema.pk %}'>
+          <button>Editar</button>
+        </a>
+        <a href='{% url 'eliminar_mision' subsistema.pk %}'>
+          <button>Eliminar</button>
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+{% endblock %}

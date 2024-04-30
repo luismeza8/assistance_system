@@ -47,3 +47,10 @@ class MisionForm(forms.ModelForm):
             'fecha_inicio': forms.DateInput(attrs={'type': 'date'}),
             'fecha_finalizacion': forms.DateInput(attrs={'type': 'date'}),
         }
+
+
+class SubsistemaForm(forms.ModelForm):
+
+    class Meta:
+        model = Subsistema
+        fields = ['nombre', 'lider']

@@ -36,11 +36,11 @@ form {
 }
 
 .btn_guardar {
-  width: 100%;
+  width: 104%;
   padding: 10px;
   margin: 20px 0;
-  margin-left: 10px;
   border-radius: 8px;
+  border: 2px solid #ccc;
 }
 
 .checkbox_list label {

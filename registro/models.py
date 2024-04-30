@@ -3,9 +3,12 @@ from django.db import models
 # Create your models here.
 class Subsistema(models.Model):
     nombre = models.CharField(max_length=100)
+    lider = models.ForeignKey('Miembro', on_delete=models.CASCADE, related_name='lider', null=True, blank=True)
 
     def __str__(self):
         return self.nombre
+
+#categorias
 
 
 class Mision(models.Model):
@@ -33,7 +36,7 @@ class Registro(models.Model):
         'S': 'Salida',
     }
 
-    miembro = models.ForeignKey(Miembro, on_delete=models.CASCADE)
+    miembro = models.ForeignKey(Miembro, on_delete=models.CASCADE, related_name='miembro_de')
     fecha = models.DateTimeField(auto_now_add=True, auto_now=False)
     tipo = models.CharField(max_length=1, choices=TIPO, default='E')
 

@@ -1,0 +1,41 @@
+.content {
+  margin: 30px 30px;
+  display: flex;
+  flex-direction: vertical;
+}
+ form {
+   width: 40%;
+ }
+
+#id_nombre {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  margin-bottom: 40px;
+}
+
+.label_form {
+  margin: 12px 0;
+  display: block;
+  font-size: 20px;
+}
+
+#id_lider {
+  height: 34px;
+  width: 104%;
+  margin-bottom: 40px;
+  height: 46px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  background-color: white;
+  padding-left: 10px;
+}
+
+.btn_guardar {
+  width: 104%;
+  padding: 10px;
+  margin: 20px 0;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+}

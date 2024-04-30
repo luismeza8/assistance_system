@@ -82,3 +82,19 @@ def eliminar_mision(request, primary_key):
 
     return render(request, 'registro/eliminar_mision.html', {'mision': mision})
 
+
+def subsistemas(request):
+    subsistemas = Subsistema.objects.all()
+    return render(request, 'registro/subsistemas.html', {'subsistemas': subsistemas})
+
+
+def agregar_subsistema(request):
+    if request.method == 'POST':
+        form = SubsistemaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('subsistemas')
+    else:
+        form = SubsistemaForm()
+        return render(request, 'registro/formulario_subsistema.html', {'form': form})
+

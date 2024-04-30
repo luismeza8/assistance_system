@@ -14,7 +14,7 @@ table {
   margin-left: 4px;
 }
 
-.agregar_mision {
+.agregar_subsistema {
   margin: 12px 0px;
   border-radius: 8px;
   padding: 8px;
@@ -45,9 +45,6 @@ td {
 }
 
 .celda_id,
-.celda_n_miembros,
-.celda_fecha_inicio,
-.celda_fecha_finalizacion,
 .celda_nombre,
 .celda_acciones {
   text-align: center;
@@ -56,3 +53,4 @@ td {
 .columna_lider {
   text-align: left;
 }
+
