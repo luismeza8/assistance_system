@@ -98,3 +98,24 @@ def agregar_subsistema(request):
         form = SubsistemaForm()
         return render(request, 'registro/formulario_subsistema.html', {'form': form})
 
+
+def editar_subsistema(request, primary_key):
+    subsistema = Subsistema.objects.get(pk=primary_key)
+    form = SubsistemaForm(instance=subsistema)
+
+    if request.method == 'POST':
+        form = SubsistemaForm(request.POST, instance=subsistema)
+        if form.is_valid():
+            form.save()
+            return redirect('subsistemas')
+
+    return render(request, 'registro/formulario_subsistema.html', {'form': form})
+
+
+def eliminar_subsistema(request, primary_key):
+    subsistema = Subsistema.objects.get(pk=primary_key)
+
+    if request.method == 'POST':
+        subsistema.delete()
+        return redirect('subsistemas')
+    return render(request, 'registro/eliminar_subsistema.html', {'subsistema': subsistema})

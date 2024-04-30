@@ -28,10 +28,10 @@
       <td class='celda_nombre'>{{ subsistema.nombre }}</td>
       <td class='celda_lider'>{{ subsistema.lider.nombre }}</td>
       <td class='celda_acciones'>
-        <a href='{% url 'editar_mision' subsistema.pk %}'>
+        <a href='{% url 'editar_subsistema' subsistema.pk %}'>
           <button>Editar</button>
         </a>
-        <a href='{% url 'eliminar_mision' subsistema.pk %}'>
+        <a href='{% url 'eliminar_subsistema' subsistema.pk %}'>
           <button>Eliminar</button>
         </a>
       </td>
