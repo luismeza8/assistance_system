@@ -23,6 +23,7 @@
         <tr>
           <th class='columna_id'>ID</th>
           <th class='columna_nombre'>Nombre</th>
+          <th class='columna_horas_trabajadas'>Horas trabajadas</th>
           <th class='columna_misiones'>Misiones</th>
           <th class='columna_subsistemas'>Subsistemas</th>
           <th class='columna_acciones'>Acciones</th>
@@ -33,6 +34,7 @@
           <tr>
             <td class='celda_id'>{{ miembro.pk }}</td>
             <td>{{ miembro.nombre }}</td>
+            <td class='celda_horas_trabajadas'>{{ miembro.horas_trabajadas_esta_semana }} / {{ miembro.horas_acordadas }}</td>
             <td class='celda_misiones'>
               {% for mision in miembro.mision.all %}
                 {{ mision.nombre }}{% if not forloop.last %}, {% endif %}

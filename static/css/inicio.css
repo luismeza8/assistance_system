@@ -47,7 +47,8 @@ td {
 .celda_misiones,
 .celda_subsistemas,
 .celda_id,
-.celda_acciones {
+.celda_acciones,
+.celda_horas_trabajadas {
   text-align: center;
 }
 

@@ -13,18 +13,18 @@ class MiembroForm(forms.ModelForm):
         label='Mision/es',
         queryset=Mision.objects.all(),
         widget=forms.CheckboxSelectMultiple(attrs={'class': 'checkbox_list'}),
-        required=True,
+        required=False,
     )
     subsistema = forms.ModelMultipleChoiceField(
         label='Subsistema/s',
         queryset=Subsistema.objects.all(),
         widget=forms.CheckboxSelectMultiple(attrs={'class': 'checkbox_list'}),
-        required=True,
+        required=False,
     )
 
     class Meta:
         model = Miembro
-        fields = ['nombre', 'mision', 'subsistema']
+        fields = ['nombre', 'mision', 'subsistema', 'horas_acordadas']
 
 
 class MisionForm(forms.ModelForm):

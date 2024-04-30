@@ -12,6 +12,14 @@
   margin-bottom: 40px;
 }
 
+#id_horas_acordadas {
+  margin-bottom: 40px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+}
+
 .nombre {
   width: 100%;
   padding: 10px;
