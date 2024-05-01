@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis miembros y misiones</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:500,800' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel='icon' href='{% static 'images/horus_icono_sf.png' %}'>
     {% block head %}
     {% endblock %}
 </head>
@@ -17,9 +19,18 @@
     <aside>
       <img src="{% static 'images/logo_horus_blanco_sf.png' %}" width=200px>
       <ul>
-        <li><a href={% url 'miembros' %}>Inicio</a></li>
-        <li><a href="{% url 'misiones' %}">Misiones</a></li>
-        <li><a href={% url 'subsistemas' %}>Subsistemas</a></li>
+        <li class='contenedor_aside'>
+          <i class='material-icons'>group</i>
+          <a class='titulo' href={% url 'miembros' %}>Miembros</a>
+        </li>
+        <li class='contenedor_aside'>
+          <i class='material-icons'>rocket_launch</i>
+          <a class='titulo' href="{% url 'misiones' %}">Misiones</a>
+        </li>
+        <li class='contenedor_aside'>
+          <i class='material-icons'>workspaces</i>
+          <a class='titulo' href={% url 'subsistemas' %}>Subsistemas</a>
+        </li>
       </ul>
     </aside>
 

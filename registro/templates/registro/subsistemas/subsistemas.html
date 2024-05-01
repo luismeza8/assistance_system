@@ -3,6 +3,8 @@
 
 {% block head %}
 <link rel='stylesheet' href='{% static 'css/subsistemas/subsistemas.css' %}'>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+<title>Subsistemas</title>
 {% endblock %}
 
 {% block content %}
@@ -18,6 +20,7 @@
       <th class='columna_id'>ID</th>
       <th class='columna_nombre'>Nombre</th>
       <th class='columna_lider'>Lider</th>
+      <th class='columna_n_miembros'>N. miembros</th>
       <th class='columna_acciones'>Acciones</th>
     </tr>
     </thead>
@@ -27,12 +30,17 @@
       <td class='celda_id'>{{ subsistema.pk }}</td>
       <td class='celda_nombre'>{{ subsistema.nombre }}</td>
       <td class='celda_lider'>{{ subsistema.lider.nombre }}</td>
+      <td class='celda_n_miembros'>{{ subsistema.miembro_set.count }}</td>
       <td class='celda_acciones'>
         <a href='{% url 'editar_subsistema' subsistema.pk %}'>
-          <button>Editar</button>
+          <button class='btn_editar'>
+            <i class='material-symbols-outlined'>edit_square</i>
+          </button>
         </a>
         <a href='{% url 'eliminar_subsistema' subsistema.pk %}'>
-          <button>Eliminar</button>
+          <button class='btn_eliminar'>
+            <i class='material-symbols-outlined'>delete</i>
+          </button>
         </a>
       </td>
     </tr>

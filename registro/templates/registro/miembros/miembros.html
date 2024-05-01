@@ -5,10 +5,9 @@
 <html lang="en">
 <head>
   {% block head %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis miembros y misiones</title>
+    <title>Miembros</title>
     <link rel="stylesheet" href={% static 'css/miembros/miembros.css' %}>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   {% endblock %}
 </head>
   <body>
@@ -34,7 +33,7 @@
           {% for miembro in miembros %}
           <tr>
             <td class='celda_id'>{{ miembro.pk }}</td>
-            <td>{{ miembro.nombre }}</td>
+            <td class='celda_nombre'>{{ miembro.nombre }}</td>
             <td class='celda_horas_trabajadas'>{{ miembro.horas_trabajadas_esta_semana }} / {{ miembro.horas_acordadas }}</td>
             <td class='celda_misiones'>
               {% for mision in miembro.mision.all %}
@@ -48,10 +47,14 @@
             </td>
             <td class='celda_acciones'>
               <a href='{% url 'editar_miembro' miembro.pk %}'>
-                <button>Editar</button>
+                <button class='btn_editar'>
+                  <i class='material-symbols-outlined'>edit_square</i>
+                </button>
               </a>
               <a href='{% url 'eliminar_miembro' miembro.pk %}'>
-                <button>Eliminar</button>
+                <button class='btn_eliminar'>
+                  <i class='material-symbols-outlined'>delete</i>
+                </button>
               </a>
             </td>
           </tr>

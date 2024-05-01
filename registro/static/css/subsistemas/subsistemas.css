@@ -1,9 +1,9 @@
 table {
-  background-color: lightgrey;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   width: 100%;
   table-layout: fixed;
   border-radius: 8px;
+  border-spacing: 8px;
 }
 
 .above_table {
@@ -17,12 +17,22 @@ table {
   margin: 12px 0px;
   border-radius: 8px;
   padding: 8px;
-  border-radius: 8px;
-  border: 2px solid #ccc;
+  border-radius: 16px;
+  border: none;
+  color: white;
+  background-color: #1D1B4E;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.btn_editar, .btn_eliminar {
+  border: none;
+  color: #1D1B4E;
+  cursor: pointer;
+  background-color: #E7E7FA;
 }
 
 tbody {
-  height: 500px;
   width: 100%;
   overflow-y: auto;
   overflow-x: auto;
@@ -30,33 +40,35 @@ tbody {
 
 th {
   height: 20px;
-  border: 1px solid #ddd;
-  padding: 8px;
+  padding: 12px 0 12px 0;
+  background-color: #1D1B4E;
+  color: white;
+  border-radius: 12px;
 }
 
 td {
-  height: 60px;
+  height: 30px;
+  background-color: #E7E7FA;
+  border-radius: 16px;
 }
 
 .columna_id {
   width: 60px;
 }
 
-.columna_n_miembros,
-.columna_acciones,
-.columna_nombre,
-.columna_fecha_inicio,
-.columna_fecha_finalizacion {
-  width: 12%;
+.columna_acciones {
+  width: 8%;
 }
 
+.columna_n_miembros,
+.columna_nombre {
+  width: 24%;
+}
+
+.celda_n_miembros,
+.celda_lider,
 .celda_id,
 .celda_nombre,
 .celda_acciones {
   text-align: center;
 }
-
-.columna_lider {
-  text-align: left;
-}
-

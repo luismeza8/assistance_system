@@ -17,14 +17,14 @@
   width: 100%;
   padding: 10px;
   border-radius: 8px;
-  border: 2px solid #ccc;
+  border: 2px solid #1D1B4E;
 }
 
 .nombre {
   width: 100%;
   padding: 10px;
   border-radius: 8px;
-  border: 2px solid #ccc;
+  border: 2px solid #1D1B4E;
   margin-bottom: 40px;
 }
 
@@ -37,6 +37,10 @@ form {
   margin-top: 12px;
 }
 
+input[type='checkbox']{
+  accent-color: #1D1B4E;
+}
+
 .label_form {
   margin: 12px 0;
   display: block;
@@ -47,8 +51,22 @@ form {
   width: 104%;
   padding: 10px;
   margin: 20px 0;
-  border-radius: 8px;
-  border: 2px solid #ccc;
+  border-radius: 16px;
+  border: none;
+  color: white;
+  background-color: #1D1B4E;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.btn_cancelar {
+  width: 104%;
+  padding: 10px;
+  border-radius: 16px;
+  border: none;
+  background-color: #E7E7FA;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .checkbox_list label {

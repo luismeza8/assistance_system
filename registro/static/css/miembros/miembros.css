@@ -1,34 +1,58 @@
+body {
+  /* overflow: hidden; */
+}
+
 table {
-  background-color: lightgrey;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   width: 100%;
   table-layout: fixed;
   border-radius: 8px;
+  border-spacing: 8px;
+}
+
+tbody {
+  overflow-y: auto;
 }
 
 .above_table {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-left: 4px;
+  margin-left: 6px;
 }
 
 .agregar_miembro {
-  margin: 12px 0px;
+  margin: 12px 0 12px 8px;
   border-radius: 8px;
-  padding: 8px;
-  border-radius: 8px;
-  border: 2px solid #ccc;
+  padding: 10px 14px;
+  margin-right: 8px;
+  border-radius: 16px;
+  border: none;
+  color: white;
+  background-color: #1D1B4E;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.btn_editar, .btn_eliminar {
+  border: none;
+  color: #1D1B4E;
+  cursor: pointer;
+  background-color: #E7E7FA;
 }
 
 th {
   height: 20px;
-  border: 1px solid #ddd;
-  padding: 8px;
+  padding: 12px 0 12px 0;
+  background-color: #1D1B4E;
+  color: white;
+  border-radius: 12px;
 }
 
 td {
-  height: 60px;
+  height: 30px;
+  background-color: #E7E7FA;
+  border-radius: 16px;
 }
 
 .columna_id {
@@ -41,9 +65,11 @@ td {
 }
 
 .columna_acciones {
-  width: 10%;
+  width: 8%;
 }
 
+.celda_nombre,
+.columna_nombre,
 .celda_misiones,
 .celda_subsistemas,
 .celda_id,

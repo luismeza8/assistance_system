@@ -4,6 +4,8 @@
 <head>
   {% block head %}
   <link rel="stylesheet" href="{% static 'css/misiones/misiones.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <title>Misiones</title>
   {% endblock %}
 </head>
 
@@ -37,10 +39,14 @@
       <td class='celda_fecha_finalizacion'>{{ mision.fecha_finalizacion }}</td>
       <td class='celda_acciones'>
         <a href='{% url 'editar_mision' mision.pk %}'>
-          <button>Editar</button>
+          <button class='btn_editar'>
+            <i class='material-symbols-outlined'>edit_square</i>
+          </button>
         </a>
         <a href='{% url 'eliminar_mision' mision.pk %}'>
-          <button>Eliminar</button>
+          <button class='btn_eliminar'>
+            <i class='material-symbols-outlined'>delete</i>
+          </button>
         </a>
       </td>
     </tr>

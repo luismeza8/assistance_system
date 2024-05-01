@@ -15,7 +15,7 @@ def agregar_miembro(request):
         form = MiembroForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            return redirect('miembros')
     else:
         form = MiembroForm()
     return render(request, 'registro/miembros/formulario_miembro.html', {'form': form})
@@ -29,7 +29,7 @@ def editar_miembro(request, primary_key):
         form = MiembroForm(request.POST, instance=miembro)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            return redirect('miembros')
 
     return render(request, 'registro/miembros/formulario_miembro.html', {'form': form})
 
@@ -39,7 +39,7 @@ def eliminar_miembro(request, primary_key):
     
     if request.method == 'POST':
         miembro.delete()
-        return redirect('index')
+        return redirect('miembros')
 
     return render(request, 'registro/miembros/eliminar_miembro.html', {'miembro': miembro})
 
