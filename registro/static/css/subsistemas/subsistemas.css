@@ -1,7 +1,6 @@
 table {
   background-color: lightgrey;
   overflow-y: auto;
-  overflow-x: auto;
   width: 100%;
   table-layout: fixed;
   border-radius: 8px;
@@ -20,6 +19,13 @@ table {
   padding: 8px;
   border-radius: 8px;
   border: 2px solid #ccc;
+}
+
+tbody {
+  height: 500px;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 th {

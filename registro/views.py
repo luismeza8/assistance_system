@@ -5,14 +5,9 @@ from django.template import loader
 from .models import *
 from .forms import *
 
-def index(request):
+def miembros(request):
     miembros = Miembro.objects.all()
-    return render(request, 'registro/inicio.html', {'miembros': miembros})
-
-
-def gestionar_misiones(request):
-    misiones = Mision.objects.all()
-    return render(request, 'registro/misiones.html', {'misiones': misiones})
+    return render(request, 'registro/miembros/miembros.html', {'miembros': miembros})
 
 
 def agregar_miembro(request):
@@ -23,7 +18,7 @@ def agregar_miembro(request):
             return redirect('index')
     else:
         form = MiembroForm()
-    return render(request, 'registro/formulario_miembro.html', {'form': form})
+    return render(request, 'registro/miembros/formulario_miembro.html', {'form': form})
 
 
 def editar_miembro(request, primary_key):
@@ -36,7 +31,7 @@ def editar_miembro(request, primary_key):
             form.save()
             return redirect('index')
 
-    return render(request, 'registro/formulario_miembro.html', {'form': form})
+    return render(request, 'registro/miembros/formulario_miembro.html', {'form': form})
 
 
 def eliminar_miembro(request, primary_key):
@@ -46,7 +41,12 @@ def eliminar_miembro(request, primary_key):
         miembro.delete()
         return redirect('index')
 
-    return render(request, 'registro/eliminar_miembro.html', {'miembro': miembro})
+    return render(request, 'registro/miembros/eliminar_miembro.html', {'miembro': miembro})
+
+
+def misiones(request):
+    misiones = Mision.objects.all()
+    return render(request, 'registro/misiones/misiones.html', {'misiones': misiones})
 
 
 def agregar_mision(request):
@@ -57,7 +57,7 @@ def agregar_mision(request):
             return redirect('misiones')
     else:
         form = MisionForm()
-    return render(request, 'registro/formulario_misiones.html', {'form': form})
+    return render(request, 'registro/misiones/formulario_mision.html', {'form': form})
 
 
 def editar_mision(request, primary_key):
@@ -70,7 +70,7 @@ def editar_mision(request, primary_key):
             form.save()
             return redirect('misiones')
     
-    return render(request, 'registro/formulario_misiones.html', {'form': form})
+    return render(request, 'registro/misiones/formulario_mision.html', {'form': form})
 
 
 def eliminar_mision(request, primary_key):
@@ -80,12 +80,12 @@ def eliminar_mision(request, primary_key):
         mision.delete()
         return redirect('misiones')
 
-    return render(request, 'registro/eliminar_mision.html', {'mision': mision})
+    return render(request, 'registro/misiones/eliminar_mision.html', {'mision': mision})
 
 
 def subsistemas(request):
     subsistemas = Subsistema.objects.all()
-    return render(request, 'registro/subsistemas.html', {'subsistemas': subsistemas})
+    return render(request, 'registro/subsistemas/subsistemas.html', {'subsistemas': subsistemas})
 
 
 def agregar_subsistema(request):
@@ -96,7 +96,7 @@ def agregar_subsistema(request):
             return redirect('subsistemas')
     else:
         form = SubsistemaForm()
-        return render(request, 'registro/formulario_subsistema.html', {'form': form})
+        return render(request, 'registro/subsistemas/formulario_subsistema.html', {'form': form})
 
 
 def editar_subsistema(request, primary_key):
@@ -109,7 +109,7 @@ def editar_subsistema(request, primary_key):
             form.save()
             return redirect('subsistemas')
 
-    return render(request, 'registro/formulario_subsistema.html', {'form': form})
+    return render(request, 'registro/subsistemas/formulario_subsistema.html', {'form': form})
 
 
 def eliminar_subsistema(request, primary_key):
@@ -118,4 +118,4 @@ def eliminar_subsistema(request, primary_key):
     if request.method == 'POST':
         subsistema.delete()
         return redirect('subsistemas')
-    return render(request, 'registro/eliminar_subsistema.html', {'subsistema': subsistema})
+    return render(request, 'registro/subsistemas/eliminar_subsistema.html', {'subsistema': subsistema})

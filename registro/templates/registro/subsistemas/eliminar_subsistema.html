@@ -1,14 +1,15 @@
 {% load static %}
 <head>
-  <link rel="stylesheet" href="{% static 'css/eliminar_miembro.css' %}">
+  <link rel="stylesheet" href="{% static 'css/subsistemas/eliminar_subsistema.css' %}">
 </head>
 <body>
   <div class='contenido'>
     <form method='POST'>
       {% csrf_token %}
-      <h1>¿Deseas eliminar a {{ miembro.nombre }}?</h1>
+      <h1>¿Deseas eliminar el subsistema {{ subsistema.nombre }}?</h1>
         <button class='btn_cancelar' type='button' onclick='window.history.back()'>Cancelar</button>
       <button class='btn_si' type="submit">Si</button>
     </form>
   </div>
 </body>
+
