@@ -17,4 +17,6 @@ urlpatterns = [
     path('agregar_subsistema', views.agregar_subsistema, name='agregar_subsistema'),
     path('editar_subsistema/<int:primary_key>', views.editar_subsistema, name='editar_subsistema'),
     path('eliminar_subsistema/<int:primary_key>', views.eliminar_subsistema, name='eliminar_subsistema'),
+
+    path('registros/<int:primary_key>', views.registros, name='registros'),
 ]

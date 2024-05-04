@@ -1,0 +1,41 @@
+{% extends 'registro/base.html' %}
+{% load static %}
+
+{% block head %}
+  <title>{{ registros.0.miembro }}</title>
+  <link rel="stylesheet" href={% static 'css/registros/registros.css' %}>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+  <body>
+  <div class='above_table'>
+    <h3>Total de registros: {{ registros.count }}</h3>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th class='columna_id'>ID</th>
+        <th class='columna_tipo'>Tipo</th>
+        <th class='columna_fecha'>Fecha</th>
+        <th class='columna_hora'>Hora</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for registro in registros %}
+        <tr>
+          <td class='celda_id'>{{ registro.pk }}</td>
+          {% if registro.tipo == 'E' %}
+            <td class='celda_tipo'>Entrada</td>
+          {% elif registro.tipo == 'S' %}
+            <td class='celda_tipo'>Salida</td>
+          {% endif %}
+          <td class='celda_fecha'>{{ registro.fecha.date }}</td>
+          <td class='celda_hora'>{{ registro.fecha.time }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
+
+{% endblock %}

@@ -41,6 +41,10 @@ tbody {
   background-color: #E7E7FA;
 }
 
+.nombre_link {
+  color: black;
+}
+
 th {
   height: 20px;
   padding: 12px 0 12px 0;

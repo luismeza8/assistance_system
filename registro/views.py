@@ -119,3 +119,8 @@ def eliminar_subsistema(request, primary_key):
         subsistema.delete()
         return redirect('subsistemas')
     return render(request, 'registro/subsistemas/eliminar_subsistema.html', {'subsistema': subsistema})
+
+
+def registros(request, primary_key):
+     registros = Registro.objects.all().filter(miembro=primary_key)
+     return render(request, 'registro/registros/registros.html', {'registros': registros})

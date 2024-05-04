@@ -38,6 +38,8 @@ class Miembro(models.Model):
         inicio_semana = hoy - timedelta(days=hoy.weekday())
         fin_semana = inicio_semana + timedelta(days=6)
         registros_semana_actual = Registro.objects.filter(miembro=self).filter(fecha__range=[inicio_semana, fin_semana])
+        if len(registros_semana_actual) < 2:
+            return 0
         segundos_trabajados = 0
         horas_trabajadas = 0
 

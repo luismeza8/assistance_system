@@ -1,0 +1,43 @@
+table {
+  /* overflow-y: auto; */
+  width: 100%;
+  table-layout: fixed;
+  border-radius: 8px;
+  border-spacing: 8px;
+}
+
+tbody {
+  overflow-y: auto;
+}
+
+.above_table {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 6px;
+}
+
+th {
+  height: 20px;
+  padding: 12px 0 12px 0;
+  background-color: #1D1B4E;
+  color: white;
+  border-radius: 12px;
+}
+
+td {
+  height: 30px;
+  background-color: #E7E7FA;
+  border-radius: 16px;
+}
+
+.columna_id {
+  width: 60px;
+}
+
+.celda_id,
+.celda_tipo,
+.celda_fecha,
+.celda_hora {
+  text-align: center;
+}
