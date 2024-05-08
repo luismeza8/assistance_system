@@ -25,6 +25,7 @@ class Mision(models.Model):
 
 class Miembro(models.Model):
     nombre = models.CharField(max_length=100)
+    nfc_id = models.CharField(max_length=100, default='')
     mision = models.ManyToManyField(Mision)
     subsistema = models.ManyToManyField(Subsistema)
     horas_acordadas = models.IntegerField()
@@ -62,7 +63,7 @@ class Registro(models.Model):
         'S': 'Salida',
     }
 
-    miembro = models.ForeignKey(Miembro, on_delete=models.CASCADE, related_name='miembro_de')
+    miembro = models.ForeignKey(Miembro, on_delete=models.CASCADE)
     fecha = models.DateTimeField(auto_now_add=True, auto_now=False)
     tipo = models.CharField(max_length=1, choices=TIPO, default='E')
 
