@@ -1,7 +1,28 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
 # Create your models here.
+class MiembroManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('Te falto el email pa')
+
+        user = self.model(email=self.normalize_email(email))
+
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password):
+        user = self.create_user(
+            email=email,
+            password=password,
+        )
+        user.is_admin = True
+        user.save(using=self._db)
+        return user
+
+
 class Subsistema(models.Model):
     nombre = models.CharField(max_length=100)
     lider = models.ForeignKey('Miembro', on_delete=models.CASCADE, related_name='lider', null=True, blank=True)
@@ -22,15 +43,26 @@ class Mision(models.Model):
         return self.nombre
 
 
-class Miembro(models.Model):
+class Miembro(AbstractBaseUser, PermissionsMixin):
     nombre = models.CharField(max_length=100)
+    email = models.EmailField(max_length=255, unique=True)
     nfc_id = models.CharField(max_length=100, default='')
     mision = models.ManyToManyField(Mision)
     subsistema = models.ManyToManyField(Subsistema)
-    horas_acordadas = models.IntegerField()
+    horas_acordadas = models.IntegerField(default=0)
+    is_admin = models.BooleanField(default=False)
+
+    objects = MiembroManager()
+
+    USERNAME_FIELD = 'email'
 
     def __str__(self):
         return self.nombre
+
+
+    @property
+    def is_staff(self):
+        return self.is_admin
 
 
     def horas_trabajadas_esta_semana(self):

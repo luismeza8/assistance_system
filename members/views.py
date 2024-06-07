@@ -1,13 +1,22 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
+from django.contrib.auth import login, authenticate
 
 from .models import *
 from .forms import *
 
 # Create your views here.
-def login(request):
-    pass
+def login_view(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = reques.POST['password']
+        user = authenticate(request, email=email, password=password)
+
+        if user is not None:
+            login(request, user)
+        else:
+            print('pos no pa')
 
 
 def miembros(request):
