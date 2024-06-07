@@ -6,6 +6,10 @@ from .models import *
 from .forms import *
 
 # Create your views here.
+def login(request):
+    pass
+
+
 def miembros(request):
     miembros = Miembro.objects.all()
     return render(request, 'registro/miembros/miembros.html', {'miembros': miembros})
