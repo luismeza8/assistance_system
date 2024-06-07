@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'registro',
+    'members',
 ]
 
 MIDDLEWARE = [
@@ -125,5 +126,5 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_DIRS = [
-        BASE_DIR / 'registro/static'
+        BASE_DIR / 'static'
         ]

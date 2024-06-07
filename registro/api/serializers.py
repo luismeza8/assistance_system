@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from members.models import *
 from registro.models import *
 
 class MisionSerializer(serializers.ModelSerializer):
