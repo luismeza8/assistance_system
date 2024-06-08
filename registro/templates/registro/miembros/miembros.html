@@ -40,7 +40,13 @@
           {% for miembro in miembros %}
           <tr>
             <td class='celda_id'>{{ miembro.pk }}</td>
-            <td class='celda_nombre'><a class='nombre_link' href='{% url 'registros' miembro.pk %}'>{{ miembro.nombre }}</a></td>
+            <td class='celda_nombre'>
+              {% if user.pk == miembro.pk or user.is_admin %}
+                <a class='nombre_link' href='{% url 'registros' miembro.pk %}'>
+              {% endif %}
+                {{ miembro.nombre }}
+              </a>
+            </td>
             <td class='celda_horas_trabajadas'> 0 / {{ miembro.horas_acordadas }}</td>
             <td class='celda_misiones'>
               {% for mision in miembro.mision.all %}
