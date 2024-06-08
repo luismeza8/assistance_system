@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from .models import *
 from .forms import *
@@ -10,20 +12,32 @@ from .forms import *
 def login_view(request):
     if request.method == 'POST':
         email = request.POST['email']
-        password = reques.POST['password']
+        password = request.POST['password']
         user = authenticate(request, email=email, password=password)
 
         if user is not None:
             login(request, user)
+            return redirect('miembros')
         else:
-            print('pos no pa')
+            messages.warning(request, 'Error al iniciar sesión.')
+            return redirect('login')
+    else:
+        return render(request, 'members/login.html')
 
 
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+
+@login_required
 def miembros(request):
     miembros = Miembro.objects.all()
     return render(request, 'registro/miembros/miembros.html', {'miembros': miembros})
 
 
+@login_required
 def agregar_miembro(request):
     if request.method == 'POST':
         form = MiembroForm(request.POST)
@@ -35,6 +49,7 @@ def agregar_miembro(request):
     return render(request, 'registro/miembros/formulario_miembro.html', {'form': form})
 
 
+@login_required
 def editar_miembro(request, primary_key):
     miembro = Miembro.objects.get(pk=primary_key)
     form = MiembroForm(instance=miembro)
@@ -48,6 +63,7 @@ def editar_miembro(request, primary_key):
     return render(request, 'registro/miembros/formulario_miembro.html', {'form': form})
 
 
+@login_required
 def eliminar_miembro(request, primary_key):
     miembro = Miembro.objects.get(pk=primary_key)
     
@@ -58,11 +74,13 @@ def eliminar_miembro(request, primary_key):
     return render(request, 'registro/miembros/eliminar_miembro.html', {'miembro': miembro})
 
 
+@login_required
 def misiones(request):
     misiones = Mision.objects.all()
     return render(request, 'registro/misiones/misiones.html', {'misiones': misiones})
 
 
+@login_required
 def agregar_mision(request):
     if request.method == 'POST':
         form = MisionForm(request.POST)
@@ -74,6 +92,7 @@ def agregar_mision(request):
     return render(request, 'registro/misiones/formulario_mision.html', {'form': form})
 
 
+@login_required
 def editar_mision(request, primary_key):
     mision = Mision.objects.get(pk=primary_key)
     form = MisionForm(instance=mision)
@@ -87,6 +106,7 @@ def editar_mision(request, primary_key):
     return render(request, 'registro/misiones/formulario_mision.html', {'form': form})
 
 
+@login_required
 def eliminar_mision(request, primary_key):
     mision = Mision.objects.get(pk=primary_key)
 
@@ -97,11 +117,13 @@ def eliminar_mision(request, primary_key):
     return render(request, 'registro/misiones/eliminar_mision.html', {'mision': mision})
 
 
+@login_required
 def subsistemas(request):
     subsistemas = Subsistema.objects.all()
     return render(request, 'registro/subsistemas/subsistemas.html', {'subsistemas': subsistemas})
 
 
+@login_required
 def agregar_subsistema(request):
     if request.method == 'POST':
         form = SubsistemaForm(request.POST)
@@ -113,6 +135,7 @@ def agregar_subsistema(request):
         return render(request, 'registro/subsistemas/formulario_subsistema.html', {'form': form})
 
 
+@login_required
 def editar_subsistema(request, primary_key):
     subsistema = Subsistema.objects.get(pk=primary_key)
     form = SubsistemaForm(instance=subsistema)
@@ -126,6 +149,7 @@ def editar_subsistema(request, primary_key):
     return render(request, 'registro/subsistemas/formulario_subsistema.html', {'form': form})
 
 
+@login_required
 def eliminar_subsistema(request, primary_key):
     subsistema = Subsistema.objects.get(pk=primary_key)
 

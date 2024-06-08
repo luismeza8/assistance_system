@@ -14,7 +14,7 @@
   <body>
     <header class='header'>
       <h1>Aplicación de Gestión</h1>
-      <a href=''>logout</a>
+      <h3>{% block user_name %}{% endblock %}</h3>
     </header>
 
     <aside>
@@ -31,6 +31,10 @@
         <li class='contenedor_aside'>
           <i class='material-icons'>workspaces</i>
           <a class='titulo' href={% url 'subsistemas' %}>Subsistemas</a>
+        </li>
+        <li class='contenedor_aside'>
+          <i class='material-icons'>logout</i>
+          <a href='{% url 'logout' %}'>Cerrar sesión</a>
         </li>
       </ul>
     </aside>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href={% static 'css/miembros/miembros.css' %}>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   {% endblock %}
+  {% block user_name %} {{ user.nombre }} {% endblock %}
 </head>
   <body>
     {% block content %}
