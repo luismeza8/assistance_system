@@ -10,9 +10,11 @@
 {% block content %}
 <div class='above_table'>
   <h3>Total de subsistemas: {{ subsistemas.count }}</h3>
-  <a href='{% url 'agregar_subsistema' %}'>
-    <button class='agregar_subsistema'>Agregar subsistema</button>
-  </a>
+  {% if user.is_admin %}
+    <a href='{% url 'agregar_subsistema' %}'>
+      <button class='agregar_subsistema'>Agregar subsistema</button>
+    </a>
+  {% endif %}
 </div>
 <table>
     <thead>
@@ -21,7 +23,9 @@
       <th class='columna_nombre'>Nombre</th>
       <th class='columna_lider'>Lider</th>
       <th class='columna_n_miembros'>N. miembros</th>
-      <th class='columna_acciones'>Acciones</th>
+      {% if user.is_admin %}
+        <th class='columna_acciones'>Acciones</th>
+      {% endif %}
     </tr>
     </thead>
   <tbody>
@@ -31,18 +35,20 @@
       <td class='celda_nombre'>{{ subsistema.nombre }}</td>
       <td class='celda_lider'>{{ subsistema.lider.nombre }}</td>
       <td class='celda_n_miembros'>{{ subsistema.miembro_set.count }}</td>
-      <td class='celda_acciones'>
-        <a href='{% url 'editar_subsistema' subsistema.pk %}'>
-          <button class='btn_editar'>
-            <i class='material-symbols-outlined'>edit_square</i>
-          </button>
-        </a>
-        <a href='{% url 'eliminar_subsistema' subsistema.pk %}'>
-          <button class='btn_eliminar'>
-            <i class='material-symbols-outlined'>delete</i>
-          </button>
-        </a>
-      </td>
+      {% if user.is_admin %}
+        <td class='celda_acciones'>
+          <a href='{% url 'editar_subsistema' subsistema.pk %}'>
+            <button class='btn_editar'>
+              <i class='material-symbols-outlined'>edit_square</i>
+            </button>
+          </a>
+          <a href='{% url 'eliminar_subsistema' subsistema.pk %}'>
+            <button class='btn_eliminar'>
+              <i class='material-symbols-outlined'>delete</i>
+            </button>
+          </a>
+        </td>
+      {% endif %}
     </tr>
     {% endfor %}
 

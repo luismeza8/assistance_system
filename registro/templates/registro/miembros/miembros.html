@@ -13,12 +13,16 @@
 </head>
   <body>
     {% block content %}
+
     <div class='above_table'>
       <h3>Total de miembros: {{ miembros.count }}</h3>
-      <a href='{% url 'agregar_miembro' %}'>
-        <button class='agregar_miembro'>Agregar miembro</button>
-      </a>
+      {% if user.is_admin %}
+        <a href='{% url 'agregar_miembro' %}'>
+          <button class='agregar_miembro'>Agregar miembro</button>
+        </a>
+      {% endif %}
     </div>
+
       <table>
         <thead>
         <tr>
@@ -27,7 +31,9 @@
           <th class='columna_horas_trabajadas'>Horas trabajadas</th>
           <th class='columna_misiones'>Misiones</th>
           <th class='columna_subsistemas'>Subsistemas</th>
-          <th class='columna_acciones'>Acciones</th>
+          {% if user.is_admin %}
+            <th class='columna_acciones'>Acciones</th>
+          {% endif %}
         </tr>
         </thead>
         <tbody>
@@ -46,18 +52,20 @@
                 {{ subsistema.nombre }}{% if not forloop.last %}, {% endif %}
               {% endfor %}
             </td>
-            <td class='celda_acciones'>
-              <a href='{% url 'editar_miembro' miembro.pk %}'>
-                <button class='btn_editar'>
-                  <i class='material-symbols-outlined'>edit_square</i>
-                </button>
-              </a>
-              <a href='{% url 'eliminar_miembro' miembro.pk %}'>
-                <button class='btn_eliminar'>
-                  <i class='material-symbols-outlined'>delete</i>
-                </button>
-              </a>
-            </td>
+            {% if user.is_admin %}
+              <td class='celda_acciones'>
+                <a href='{% url 'editar_miembro' miembro.pk %}'>
+                  <button class='btn_editar'>
+                    <i class='material-symbols-outlined'>edit_square</i>
+                  </button>
+                </a>
+                <a href='{% url 'eliminar_miembro' miembro.pk %}'>
+                  <button class='btn_eliminar'>
+                    <i class='material-symbols-outlined'>delete</i>
+                  </button>
+                </a>
+              </td>
+            {% endif %}
           </tr>
           {% endfor %}
         </tbody>

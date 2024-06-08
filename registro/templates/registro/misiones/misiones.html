@@ -12,9 +12,11 @@
 {% block content %}
 <div class='above_table'>
   <h3>Total de misiones: {{ misiones.count }}</h3>
-  <a href='{% url 'agregar_mision' %}'>
-    <button class='agregar_mision'>Agregar mision</button>
-  </a>
+  {% if user.is_admin %}
+    <a href='{% url 'agregar_mision' %}'>
+      <button class='agregar_mision'>Agregar mision</button>
+    </a>
+  {% endif %}
 </div>
 <table>
     <thead>
@@ -25,7 +27,9 @@
       <th class='columna_n_miembros'>N. Miembros</th>
       <th class='columna_fecha_inicio'>Fecha de inicio</th>
       <th class='columna_fecha_finalizacion'>Fecha de finalizacion</th>
-      <th class='columna_acciones'>Acciones</th>
+      {% if user.is_admin %}
+        <th class='columna_acciones'>Acciones</th>
+      {% endif %}
     </tr>
     </thead>
   <tbody>
@@ -37,18 +41,20 @@
       <td class='celda_n_miembros'>{{ mision.miembro_set.count }}</td>
       <td class='celda_fecha_inicio'>{{ mision.fecha_inicio }}</td>
       <td class='celda_fecha_finalizacion'>{{ mision.fecha_finalizacion }}</td>
-      <td class='celda_acciones'>
-        <a href='{% url 'editar_mision' mision.pk %}'>
-          <button class='btn_editar'>
-            <i class='material-symbols-outlined'>edit_square</i>
-          </button>
-        </a>
-        <a href='{% url 'eliminar_mision' mision.pk %}'>
-          <button class='btn_eliminar'>
-            <i class='material-symbols-outlined'>delete</i>
-          </button>
-        </a>
-      </td>
+      {% if user.is_admin %}
+        <td class='celda_acciones'>
+          <a href='{% url 'editar_mision' mision.pk %}'>
+            <button class='btn_editar'>
+              <i class='material-symbols-outlined'>edit_square</i>
+            </button>
+          </a>
+          <a href='{% url 'eliminar_mision' mision.pk %}'>
+            <button class='btn_eliminar'>
+              <i class='material-symbols-outlined'>delete</i>
+            </button>
+          </a>
+        </td>
+      {% endif %}
     </tr>
     {% endfor %}
 

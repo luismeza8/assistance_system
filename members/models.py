@@ -44,13 +44,19 @@ class Mision(models.Model):
 
 
 class Miembro(AbstractBaseUser, PermissionsMixin):
+    ROLES = {
+        'M': 'MEMBER',
+        'L': 'LEADER',
+        'A': 'ADMIN'
+    }
+
     nombre = models.CharField(max_length=100)
     email = models.EmailField(max_length=255, unique=True)
-    nfc_id = models.CharField(max_length=100, default='')
     mision = models.ManyToManyField(Mision)
     subsistema = models.ManyToManyField(Subsistema)
     horas_acordadas = models.IntegerField(default=0)
     is_admin = models.BooleanField(default=False)
+    role = models.CharField(max_length=1, choices=ROLES, default='M')
 
     objects = MiembroManager()
 
@@ -59,6 +65,17 @@ class Miembro(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.nombre
 
+
+    def is_leader(self):
+        return self.role == self.ROLES['L']
+
+
+    def is_admin(self):
+        return self.role == self.ROLES['A']
+
+
+    def is_member(self):
+        return self.role == self.ROLES['M']
 
     @property
     def is_staff(self):
