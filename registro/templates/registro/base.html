@@ -11,7 +11,7 @@
     {% block head %}
     {% endblock %}
 </head>
-  <body class='m-0 bg-white grid h-screen' style='grid-template-columns: 250px 1fr; grid-template-rows: 60px 1fr;'>
+  <body class='font-montserrat m-0 bg-white grid h-screen' style='grid-template-columns: 250px 1fr; grid-template-rows: 60px 1fr;'>
     <header class='px-4 flex justify-between items-center bg-secondary' style='grid-column: 2 / 3; grid-row: 1 / 2'>
       <h1 class='font-extrabold text-2xl'>Aplicación de Gestión</h1>
       <h3>{% block user_name %}{% endblock %}</h3>
@@ -39,7 +39,7 @@
       </ul>
     </aside>
 
-    <div class='m-4' style='grid-column: 2 / 3; grid-row: 2 / 3;'>
+    <div class='' style='grid-column: 2 / 3; grid-row: 2 / 3;'>
       {% block content %}
 
       {% endblock %}

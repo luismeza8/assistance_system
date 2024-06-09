@@ -2,3 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .table-head {
+      background-color: #1E1D4F;
+    }
+}

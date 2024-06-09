@@ -3,7 +3,6 @@ body {
 }
 
 table {
-  /* overflow-y: auto; */
   width: 100%;
   table-layout: fixed;
   border-radius: 8px;
