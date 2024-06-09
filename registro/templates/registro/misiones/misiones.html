@@ -3,46 +3,61 @@
 
 <head>
   {% block head %}
-  <link rel="stylesheet" href="{% static 'css/misiones/misiones.css' %}">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <title>Misiones</title>
   {% endblock %}
 </head>
 
 {% block content %}
-<div class='above_table'>
-  <h3>Total de misiones: {{ misiones.count }}</h3>
+<div class='m-4 flex flex-row justify-between'>
+  <h3 class='text-2xl font-semibold'>Total de misiones: {{ misiones.count }}</h3>
   {% if user.is_admin %}
     <a href='{% url 'agregar_mision' %}'>
-      <button class='agregar_mision'>Agregar mision</button>
+      <button class='p-2 px-4 bg-primary text-sm text-secondary rounded-3xl' 
+        style='box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);'>
+        Agregar mision
+      </button>
     </a>
   {% endif %}
 </div>
-<table>
+<table class='w-full border-separate' style='border-spacing: 8px;'>
     <thead>
-    <tr>
-      <th class='columna_id'>ID</th>
-      <th class='columna_nombre'>Nombre</th>
-      <th class='columna_lider'>Lider</th>
-      <th class='columna_n_miembros'>N. Miembros</th>
-      <th class='columna_fecha_inicio'>Fecha de inicio</th>
-      <th class='columna_fecha_finalizacion'>Fecha de finalizacion</th>
+    <tr class='h-12'>
+      <th class='h-10 bg-primary text-secondary rounded-3xl'>ID</th>
+      <th class='h-10 bg-primary text-secondary rounded-3xl'>Nombre</th>
+      <th class='h-10 bg-primary text-secondary rounded-3xl'>Lider</th>
+      <th class='h-10 bg-primary text-secondary rounded-3xl' style='width: 10%;'>N. Miembros</th>
+      <th class='h-10 bg-primary text-secondary rounded-3xl' style='width: 14%;'>Fecha de inicio</th>
+      <th class='h-10 bg-primary text-secondary rounded-3xl' style='width: 14%;'>Fecha de finalizacion</th>
       {% if user.is_admin %}
-        <th class='columna_acciones'>Acciones</th>
+        <th class='h-10 bg-primary text-secondary rounded-3xl' style='width: 8%;'>Acciones</th>
       {% endif %}
     </tr>
     </thead>
   <tbody>
     {% for mision in misiones %}
     <tr>
-      <td class='celda_id'>{{ mision.pk }}</td>
-      <td class='celda_nombre'>{{ mision.nombre }}</td>
-      <td class='celda_lider'>{{ mision.lider.nombre }}</td>
-      <td class='celda_n_miembros'>{{ mision.miembro_set.count }}</td>
-      <td class='celda_fecha_inicio'>{{ mision.fecha_inicio }}</td>
-      <td class='celda_fecha_finalizacion'>{{ mision.fecha_finalizacion }}</td>
+      <td class='h-10 bg-secondary text-center rounded-3xl'>
+        {{ mision.pk }}
+      </td>
+      <td class='h-10 bg-secondary text-center rounded-3xl'>
+        {{ mision.nombre }}
+      </td>
+      <td class='h-10 bg-secondary text-center rounded-3xl'>
+        {{ mision.lider.nombre }}
+      </td>
+      <td class='h-10 bg-secondary text-center rounded-3xl'>
+        {{ mision.miembro_set.count }}
+      </td>
+      <td class='h-10 bg-secondary text-center rounded-3xl'>
+        {{ mision.fecha_inicio }}
+      </td>
+      <td class='h-10 bg-secondary text-center rounded-3xl'>
+        {{ mision.fecha_finalizacion }}
+      </td>
       {% if user.is_admin %}
-        <td class='celda_acciones'>
+        <td class='h-10 bg-secondary text-center rounded-3xl'>
           <a href='{% url 'editar_mision' mision.pk %}'>
             <button class='btn_editar'>
               <i class='material-symbols-outlined'>edit_square</i>
