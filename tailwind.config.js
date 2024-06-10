@@ -2,8 +2,9 @@
 module.exports = {
   content: [
     './members/templates/**/*.html',
-    './registro/templates/registro/base.html',
-    './registro/templates/registro/miembros/miembros.html'
+    './registro/templates/**/base.html',
+    './registro/templates/**/**/*.html',
+    './registro/templates/**/**/*.html'
   ],
   theme: {
     extend: {

@@ -3,97 +3,83 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  {% block head %}
-    <title>Miembros</title>
-    <link rel="stylesheet" href={% static 'css/styles.css' %}>
-    <link href='https://fonts.googleapis.com/css?family=Montserrat:500,800' rel='stylesheet'>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  {% endblock %}
-  {% block user_name %} {{ user.nombre }} {% endblock %}
-</head>
+{% block head %}
+  <title>Miembros</title>
+  <link rel="stylesheet" href={% static 'css/styles.css' %}>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:500,800' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+{% endblock %}
+{% block user_name %} {{ user.nombre }} {% endblock %}
 
+{% block content %}
 
-<body class='font-montserrat'>
-  {% block content %}
+<div class='m-4 flex flex-row justify-between'>
+  <h3 class='text-xl font-semibold'>Total de miembros: {{ miembros.count }}</h3>
+  {% if user.is_admin %}
+    <a href='{% url 'agregar_miembro' %}'>
+      <button class='add-button'>
+        Agregar miembro
+      </button>
+    </a>
+  {% endif %}
+</div>
 
-  <div class='m-4 flex flex-row justify-between'>
-    <h3 class='text-2xl font-semibold'>Total de miembros: {{ miembros.count }}</h3>
-    {% if user.is_admin %}
-      <a href='{% url 'agregar_miembro' %}'>
-        <button class='p-2 px-4 bg-primary text-sm text-secondary rounded-3xl' 
-          style='box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);'>
-          Agregar miembro
-        </button>
-      </a>
-    {% endif %}
-  </div>
+<table class='custom-table'>
+  <thead>
+    <tr>
+      <th style='width: 4%;'>ID</th>
+      <th style='width: 40%'>Nombre</th>
+      <th style='width: 12%;'>Horas trabajadas</th>
+      <th style='width: 18%;'>Misiones</th>
+      <th style='width: 18%'>Subsistemas</th>
+      {% if user.is_admin %}
+        <th style='width: 8%;'>Acciones</th>
+      {% endif %}
+    </tr>
+  </thead>
 
-  <table class='w-full border-separate' style='border-spacing: 8px;'>
-    <thead>
-      <tr class='h-12'>
-        <th class='h-10 bg-primary text-secondary rounded-3xl'>ID</th>
-        <th class='bg-primary text-secondary rounded-3xl' style='width: 40%'>Nombre</th>
-        <th class='bg-primary text-secondary rounded-3xl'>Horas trabajadas</th>
-        <th class='bg-primary text-secondary rounded-3xl'>Misiones</th>
-        <th class='bg-primary text-secondary rounded-3xl'>Subsistemas</th>
+  <tbody>
+    {% for miembro in miembros %}
+      <tr>
+        <td>{{ miembro.pk }}</td>
+        <td>
+          {% if user.pk == miembro.pk or user.is_admin %}
+            <a class='' href='{% url 'registros' miembro.pk %}'>
+          {% endif %}
+            {{ miembro.nombre }}
+          </a>
+        </td>
+        <td>0 / {{ miembro.horas_acordadas }}</td>
+        <td>
+          {% for mision in miembro.mision.all %}
+            {{ mision.nombre }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </td>
+        <td>
+          {% for subsistema in miembro.subsistema.all %}
+            {{ subsistema.nombre }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </td>
+
         {% if user.is_admin %}
-          <th class='w-fit bg-primary text-secondary rounded-3xl' style='width: 8%;'>Acciones</th>
-        {% endif %}
-      </tr>
-    </thead>
-
-    <tbody>
-      {% for miembro in miembros %}
-        <tr>
-          <td class='h-10 bg-secondary text-center rounded-3xl'>
-            {{ miembro.pk }}
-          </td>
-
-          <td class='bg-secondary text-center rounded-3xl'>
-            {% if user.pk == miembro.pk or user.is_admin %}
-              <a class='' href='{% url 'registros' miembro.pk %}'>
-            {% endif %}
-              {{ miembro.nombre }}
+          <td>
+            <a href='{% url 'editar_miembro' miembro.pk %}'>
+              <button class='btn_editar'>
+                <i class='material-symbols-outlined'>edit_square</i>
+              </button>
+            </a>
+            <a href='{% url 'eliminar_miembro' miembro.pk %}'>
+              <button class='btn_eliminar'>
+                <i class='material-symbols-outlined'>delete</i>
+              </button>
             </a>
           </td>
+        {% endif %}
 
-          <td class='bg-secondary text-center rounded-3xl'>
-            0 / {{ miembro.horas_acordadas }}
-          </td>
-
-          <td class='bg-secondary text-center rounded-3xl'>
-            {% for mision in miembro.mision.all %}
-              {{ mision.nombre }}{% if not forloop.last %}, {% endif %}
-            {% endfor %}
-          </td>
-
-          <td class='bg-secondary text-center rounded-3xl'>
-            {% for subsistema in miembro.subsistema.all %}
-              {{ subsistema.nombre }}{% if not forloop.last %}, {% endif %}
-            {% endfor %}
-          </td>
-
-          {% if user.is_admin %}
-            <td class='bg-secondary text-center rounded-3xl'>
-              <a href='{% url 'editar_miembro' miembro.pk %}'>
-                <button class='btn_editar'>
-                  <i class='material-symbols-outlined'>edit_square</i>
-                </button>
-              </a>
-              <a href='{% url 'eliminar_miembro' miembro.pk %}'>
-                <button class='btn_eliminar'>
-                  <i class='material-symbols-outlined'>delete</i>
-                </button>
-              </a>
-            </td>
-          {% endif %}
-
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  {% endblock %}
-</body>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
 </html>
 

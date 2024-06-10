@@ -3,7 +3,41 @@
 @tailwind utilities;
 
 @layer components {
-    .table-head {
-      background-color: #1E1D4F;
-    }
+  .custom-table {
+    width: 100%;
+    border-spacing: 8px;
+    border-collapse: separate;
+  }
+
+  .custom-table thead tr {
+    height: 3rem;
+  }
+
+  .custom-table th {
+    background-color: #1E1D4F;
+    color: #E7E7FA;
+    border-radius: 18px;
+  }
+
+  .custom-table td{
+    background-color: #E7E7FA;
+    color: #1E1D4F;
+    text-align: center;
+    height: 2.5rem;
+    border-radius: 20px;
+  }
+
+  .add-button {
+    background-color: #1E1D4F;
+    color: #E7E7FA;
+    font-size: 0.85rem;
+    padding: 0.6rem 1.2rem 0.6rem 1.2rem;
+    border-radius: 0.8rem;
+  }
+
+  .add-button:hover {
+    background-color: #E7E7FA;
+    color: #1E1D4F;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  }
 }

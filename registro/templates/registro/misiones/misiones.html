@@ -1,63 +1,49 @@
 {% extends 'registro/base.html' %}
 {% load static %}
 
-<head>
-  {% block head %}
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <title>Misiones</title>
-  {% endblock %}
-</head>
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+<title>Misiones</title>
+{% endblock %}
+{% block user_name %} {{ user.nombre }} {% endblock %}
 
 {% block content %}
 <div class='m-4 flex flex-row justify-between'>
-  <h3 class='text-2xl font-semibold'>Total de misiones: {{ misiones.count }}</h3>
+  <h3 class='text-xl font-semibold'>Total de misiones: {{ misiones.count }}</h3>
   {% if user.is_admin %}
     <a href='{% url 'agregar_mision' %}'>
-      <button class='p-2 px-4 bg-primary text-sm text-secondary rounded-3xl' 
-        style='box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);'>
+      <button class='add-button'>
         Agregar mision
       </button>
     </a>
   {% endif %}
 </div>
-<table class='w-full border-separate' style='border-spacing: 8px;'>
+<table class='custom-table'>
     <thead>
-    <tr class='h-12'>
-      <th class='h-10 bg-primary text-secondary rounded-3xl'>ID</th>
-      <th class='h-10 bg-primary text-secondary rounded-3xl'>Nombre</th>
-      <th class='h-10 bg-primary text-secondary rounded-3xl'>Lider</th>
-      <th class='h-10 bg-primary text-secondary rounded-3xl' style='width: 10%;'>N. Miembros</th>
-      <th class='h-10 bg-primary text-secondary rounded-3xl' style='width: 14%;'>Fecha de inicio</th>
-      <th class='h-10 bg-primary text-secondary rounded-3xl' style='width: 14%;'>Fecha de finalizacion</th>
+    <tr>
+      <th style='width: 4%;'>ID</th>
+      <th>Nombre</th>
+      <th>Lider</th>
+      <th style='width: 10%;'>N. Miembros</th>
+      <th style='width: 14%;'>Fecha de inicio</th>
+      <th style='width: 14%;'>Fecha de finalizacion</th>
       {% if user.is_admin %}
-        <th class='h-10 bg-primary text-secondary rounded-3xl' style='width: 8%;'>Acciones</th>
+        <th style='width: 8%;'>Acciones</th>
       {% endif %}
     </tr>
     </thead>
   <tbody>
     {% for mision in misiones %}
     <tr>
-      <td class='h-10 bg-secondary text-center rounded-3xl'>
-        {{ mision.pk }}
-      </td>
-      <td class='h-10 bg-secondary text-center rounded-3xl'>
-        {{ mision.nombre }}
-      </td>
-      <td class='h-10 bg-secondary text-center rounded-3xl'>
-        {{ mision.lider.nombre }}
-      </td>
-      <td class='h-10 bg-secondary text-center rounded-3xl'>
-        {{ mision.miembro_set.count }}
-      </td>
-      <td class='h-10 bg-secondary text-center rounded-3xl'>
-        {{ mision.fecha_inicio }}
-      </td>
-      <td class='h-10 bg-secondary text-center rounded-3xl'>
-        {{ mision.fecha_finalizacion }}
-      </td>
+      <td>{{ mision.pk }} </td>
+      <td>{{ mision.nombre }}</td>
+      <td>{{ mision.lider.nombre }}</td>
+      <td>{{ mision.miembro_set.count }}</td>
+      <td>{{ mision.fecha_inicio }}</td>
+      <td>{{ mision.fecha_finalizacion }}</td>
       {% if user.is_admin %}
-        <td class='h-10 bg-secondary text-center rounded-3xl'>
+        <td>
           <a href='{% url 'editar_mision' mision.pk %}'>
             <button class='btn_editar'>
               <i class='material-symbols-outlined'>edit_square</i>

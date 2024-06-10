@@ -2,41 +2,45 @@
 {% load static %}
 
 {% block head %}
-<link rel='stylesheet' href='{% static 'css/subsistemas/subsistemas.css' %}'>
+<link rel='stylesheet' href='{% static 'css/styles.css' %}'>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 <title>Subsistemas</title>
 {% endblock %}
+{% block user_name %} {{ user.nombre }} {% endblock %}
 
 {% block content %}
-<div class='above_table'>
-  <h3>Total de subsistemas: {{ subsistemas.count }}</h3>
+
+<div class='m-4 flex flex-row justify-between'>
+  <h3 class='text-xl font-semibold'>Total de subsistemas: {{ subsistemas.count }}</h3>
   {% if user.is_admin %}
     <a href='{% url 'agregar_subsistema' %}'>
-      <button class='agregar_subsistema'>Agregar subsistema</button>
+      <button class='add-button'>
+        Agregar subsistema
+      </button>
     </a>
   {% endif %}
 </div>
-<table>
+<table class='custom-table'>
     <thead>
-    <tr>
-      <th class='columna_id'>ID</th>
-      <th class='columna_nombre'>Nombre</th>
-      <th class='columna_lider'>Lider</th>
-      <th class='columna_n_miembros'>N. miembros</th>
-      {% if user.is_admin %}
-        <th class='columna_acciones'>Acciones</th>
-      {% endif %}
-    </tr>
+      <tr>
+        <th style='width: 4%;'>ID</th>
+        <th>Nombre</th>
+        <th>Lider</th>
+        <th style='width: 10%;'>N. miembros</th>
+        {% if user.is_admin %}
+          <th style='width: 8%;'>Acciones</th>
+        {% endif %}
+      </tr>
     </thead>
   <tbody>
     {% for subsistema in subsistemas %}
     <tr>
-      <td class='celda_id'>{{ subsistema.pk }}</td>
-      <td class='celda_nombre'>{{ subsistema.nombre }}</td>
-      <td class='celda_lider'>{{ subsistema.lider.nombre }}</td>
-      <td class='celda_n_miembros'>{{ subsistema.miembro_set.count }}</td>
+      <td>{{ subsistema.pk }}</td>
+      <td>{{ subsistema.nombre }}</td>
+      <td>{{ subsistema.lider.nombre }}</td>
+      <td>{{ subsistema.miembro_set.count }}</td>
       {% if user.is_admin %}
-        <td class='celda_acciones'>
+        <td>
           <a href='{% url 'editar_subsistema' subsistema.pk %}'>
             <button class='btn_editar'>
               <i class='material-symbols-outlined'>edit_square</i>

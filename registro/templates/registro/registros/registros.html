@@ -3,35 +3,35 @@
 
 {% block head %}
   <title>{{ registros.0.miembro }}</title>
-  <link rel="stylesheet" href={% static 'css/registros/registros.css' %}>
+  <link rel="stylesheet" href={% static 'css/styles.css' %}>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 {% endblock %}
 
 {% block content %}
   <body>
-  <div class='above_table'>
-    <h3>Total de registros: {{ registros.count }}</h3>
+  <div class='m-4'>
+    <h3 class='text-md font-semibold'>Total de registros: {{ registros.count }}</h3>
   </div>
-  <table>
+  <table class='custom-table'>
     <thead>
       <tr>
-        <th class='columna_id'>ID</th>
-        <th class='columna_tipo'>Tipo</th>
-        <th class='columna_fecha'>Fecha</th>
-        <th class='columna_hora'>Hora</th>
+        <th style='width: 4%;'>ID</th>
+        <th>Tipo</th>
+        <th>Fecha</th>
+        <th>Hora</th>
       </tr>
     </thead>
     <tbody>
       {% for registro in registros %}
         <tr>
-          <td class='celda_id'>{{ registro.pk }}</td>
+          <td>{{ registro.pk }}</td>
           {% if registro.tipo == 'E' %}
-            <td class='celda_tipo'>Entrada</td>
+            <td>Entrada</td>
           {% elif registro.tipo == 'S' %}
-            <td class='celda_tipo'>Salida</td>
+            <td>Salida</td>
           {% endif %}
-          <td class='celda_fecha'>{{ registro.fecha.date }}</td>
-          <td class='celda_hora'>{{ registro.fecha.time }}</td>
+          <td>{{ registro.fecha.date }}</td>
+          <td>{{ registro.fecha.time }}</td>
         </tr>
       {% endfor %}
     </tbody>
