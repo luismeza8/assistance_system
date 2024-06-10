@@ -36,14 +36,20 @@ def logout_view(request):
 
 
 @login_required
-def miembros(request):
-    miembros = Miembro.objects.all()
-    return render(request, 'registro/miembros/miembros.html', {'miembros': miembros})
+def access_denied(request):
+    return HttpResponse('nop')
 
 
 @login_required
-def access_denied(request):
-    return HttpResponse('nop')
+def miembros(request):
+    miembros = Miembro.objects.all()
+
+    if request.htmx:
+        template = 'registro/miembros/miembros.html'
+    else:
+        template = 'registro/miembros/miembros_full.html'
+    
+    return render(request, template, {'miembros': miembros})
 
 
 @login_required
@@ -89,7 +95,13 @@ def eliminar_miembro(request, primary_key):
 @login_required
 def misiones(request):
     misiones = Mision.objects.all()
-    return render(request, 'registro/misiones/misiones.html', {'misiones': misiones})
+
+    if request.htmx:
+        template = 'registro/misiones/misiones.html'
+    else:
+        template = 'registro/misiones/misiones_full.html'
+
+    return render(request, template, {'misiones': misiones})
 
 
 @login_required
@@ -135,7 +147,13 @@ def eliminar_mision(request, primary_key):
 @login_required
 def subsistemas(request):
     subsistemas = Subsistema.objects.all()
-    return render(request, 'registro/subsistemas/subsistemas.html', {'subsistemas': subsistemas})
+
+    if request.htmx:
+        template = 'registro/subsistemas/subsistemas.html'
+    else:
+        template = 'registro/subsistemas/subsistemas_full.html'
+
+    return render(request, template, {'subsistemas': subsistemas})
 
 
 @login_required

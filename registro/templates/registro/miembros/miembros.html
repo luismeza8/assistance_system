@@ -1,20 +1,15 @@
-{% extends 'registro/base.html' %}
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
 {% block head %}
   <title>Miembros</title>
-  <link rel="stylesheet" href={% static 'css/styles.css' %}>
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:500,800' rel='stylesheet'>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 {% endblock %}
-{% block user_name %} {{ user.nombre }} {% endblock %}
 
 {% block content %}
 
 <div class='m-4 flex flex-row justify-between'>
-  <h3 class='text-xl font-semibold'>Total de miembros: {{ miembros.count }}</h3>
+  <h3 class='mt-2 text-md font-semibold'>Total de miembros: {{ miembros.count }}</h3>
   {% if user.is_admin %}
     <a href='{% url 'agregar_miembro' %}'>
       <button class='add-button'>
@@ -44,10 +39,13 @@
         <td>{{ miembro.pk }}</td>
         <td>
           {% if user.pk == miembro.pk or user.is_admin %}
-            <a class='' href='{% url 'registros' miembro.pk %}'>
+            <div 
+            hx-get='{% url 'registros' miembro.pk %}'
+            hx-target='#content'
+            hx-push-url='true'>
           {% endif %}
             {{ miembro.nombre }}
-          </a>
+          </div>
         </td>
         <td>0 / {{ miembro.horas_acordadas }}</td>
         <td>

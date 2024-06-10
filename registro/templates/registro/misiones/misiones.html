@@ -1,16 +1,12 @@
-{% extends 'registro/base.html' %}
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/styles.css' %}">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-<title>Misiones</title>
+  <title>Misiones</title>
 {% endblock %}
-{% block user_name %} {{ user.nombre }} {% endblock %}
 
 {% block content %}
 <div class='m-4 flex flex-row justify-between'>
-  <h3 class='text-xl font-semibold'>Total de misiones: {{ misiones.count }}</h3>
+  <h3 class='mt-2 text-md font-semibold'>Total de misiones: {{ misiones.count }}</h3>
   {% if user.is_admin %}
     <a href='{% url 'agregar_mision' %}'>
       <button class='add-button'>
