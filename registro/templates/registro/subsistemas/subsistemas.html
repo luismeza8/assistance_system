@@ -36,16 +36,12 @@
       <td>{{ subsistema.lider.nombre }}</td>
       <td>{{ subsistema.miembro_set.count }}</td>
       {% if user.is_admin %}
-        <td>
-          <a href='{% url 'editar_subsistema' subsistema.pk %}'>
-            <button class='btn_editar'>
-              <i class='material-symbols-outlined'>edit_square</i>
-            </button>
+        <td class='flex flex-row items-center justify-center'>
+          <a class='mx-2 material-symbols-outlined' href='{% url 'editar_subsistema' subsistema.pk %}'>
+            edit_square
           </a>
-          <a href='{% url 'eliminar_subsistema' subsistema.pk %}'>
-            <button class='btn_eliminar'>
-              <i class='material-symbols-outlined'>delete</i>
-            </button>
+          <a class='mx-2 material-symbols-outlined' href='{% url 'eliminar_subsistema' subsistema.pk %}'>
+              delete
           </a>
         </td>
       {% endif %}

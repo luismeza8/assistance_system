@@ -39,16 +39,12 @@
       <td>{{ mision.fecha_inicio }}</td>
       <td>{{ mision.fecha_finalizacion }}</td>
       {% if user.is_admin %}
-        <td>
-          <a href='{% url 'editar_mision' mision.pk %}'>
-            <button class='btn_editar'>
-              <i class='material-symbols-outlined'>edit_square</i>
-            </button>
+        <td class='flex flex-row items-center justify-center'>
+          <a class='mx-2 material-symbols-outlined' href='{% url 'editar_mision' mision.pk %}'>
+            edit_square
           </a>
-          <a href='{% url 'eliminar_mision' mision.pk %}'>
-            <button class='btn_eliminar'>
-              <i class='material-symbols-outlined'>delete</i>
-            </button>
+          <a class='mx-2 material-symbols-outlined' href='{% url 'eliminar_mision' mision.pk %}'>
+              delete
           </a>
         </td>
       {% endif %}
