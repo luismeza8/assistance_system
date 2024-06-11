@@ -110,6 +110,9 @@ LOGIN_REDIRECT_URL = 'miembros'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
 
+MEDIA_ROOT = '/home/lm/Code/Horus/checador/media/'
+MEDIA_URL = '/media/'
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 

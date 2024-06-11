@@ -17,6 +17,9 @@
     <header class='px-4 flex justify-between items-center bg-secondary' style='grid-column: 2 / 3; grid-row: 1 / 2'>
       <h1 class='font-extrabold text-2xl'>Aplicación de Gestión</h1>
       <h3>{{ user.nombre }}</h3>
+      {% if user.profile_picture %}
+        <img src='{{ user.profile_picture.url }}' width=100px>
+      {% endif %}
     </header>
 
     <aside class='m-0 bg-primary text-secondary' style='grid-column: 1 / 2; grid-row: 1 / 3;'>

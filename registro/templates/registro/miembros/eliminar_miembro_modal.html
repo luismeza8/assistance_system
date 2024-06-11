@@ -6,10 +6,12 @@
   <body>
     <div 
       id='modal'
-      class='w-full h-screen z-10 fixed flex justify-center items-center'
+      class='w-full h-screen z-10 fixed flex justify-center'
       style='background-color: rgba(0, 0, 0, 0.4); left: 0; top: 0;'>
-      <div class='flex flex-col justify-evenly items-center bg-white w-5/12 h-1/5 rounded-xl'>
-        <h1 class='mt-8 text-2xl'>¿Seguro qué deseas eliminar a {{ miembro.nombre }}?</h1>
+      <div 
+        class='flex flex-col justify-evenly items-center bg-white w-2/6 h-1/5 rounded-xl' 
+        style='margin-top: 15vh;'>
+        <h1 class='mt-8 font-bold text-2xl'>¿Seguro qué deseas eliminar a {{ miembro.nombre }}?</h1>
         <form
           action='{% url 'eliminar_miembro' miembro.pk %}' 
           method='POST'>

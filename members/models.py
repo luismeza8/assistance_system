@@ -57,6 +57,7 @@ class Miembro(AbstractBaseUser, PermissionsMixin):
     horas_acordadas = models.IntegerField(default=0)
     is_admin = models.BooleanField(default=False)
     role = models.CharField(max_length=1, choices=ROLES, default='M')
+    profile_picture = models.ImageField(upload_to='users_profile_picture', default='')
 
     objects = MiembroManager()
 

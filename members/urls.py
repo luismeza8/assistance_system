@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 
 from . import views
@@ -23,4 +25,4 @@ urlpatterns = [
     path('agregar_subsistema', views.agregar_subsistema, name='agregar_subsistema'),
     path('editar_subsistema/<int:primary_key>', views.editar_subsistema, name='editar_subsistema'),
     path('eliminar_subsistema/<int:primary_key>', views.eliminar_subsistema, name='eliminar_subsistema'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
