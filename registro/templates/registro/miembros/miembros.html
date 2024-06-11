@@ -21,6 +21,8 @@
   {% endif %}
 </div>
 
+<div id='modal-place'></div>
+
 <table class='custom-table'>
   <thead>
     <tr>
@@ -66,8 +68,10 @@
             <a class='mx-2 material-symbols-outlined' href='{% url 'editar_miembro' miembro.pk %}'>
               edit_square
             </a>
-            <a class='mx-2 material-symbols-outlined' href='{% url 'eliminar_miembro' miembro.pk %}'>
-                delete
+            <a class='mx-2 cursor-pointer material-symbols-outlined' 
+             hx-get='{% url 'eliminar_miembro' miembro.pk %}'
+             hx-target='#modal-place'>
+              delete
             </a>
           </td>
         {% endif %}

@@ -1,0 +1,40 @@
+{% load static %}
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+  </head>
+  <body>
+    <div 
+      id='modal'
+      class='w-full h-screen z-10 fixed flex justify-center items-center'
+      style='background-color: rgba(0, 0, 0, 0.4); left: 0; top: 0;'>
+      <div class='flex flex-col justify-evenly items-center bg-white w-5/12 h-1/5 rounded-xl'>
+        <h1 class='mt-8 text-2xl'>¿Seguro qué deseas eliminar a {{ miembro.nombre }}?</h1>
+        <form
+          action='{% url 'eliminar_miembro' miembro.pk %}' 
+          method='POST'>
+            {% csrf_token %}
+            <div class='flex flex-row justify-center items-center'>
+              <button 
+                class='block mr-1 px-4 py-2 bg-primary text-secondary rounded-xl hover:shadow-xl'
+                type='button' onclick='deleteModal()'>
+                Cancelar
+              </button>
+              <button 
+                class='block ml-1 px-4 py-2 bg-secondary text-primary rounded-xl hover:shadow-xl' 
+                type='submit'>
+                Aceptar
+               </button>
+            </div>
+          </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  function deleteModal() {
+    const modal = document.getElementById('modal');
+    modal.remove();
+  }
+</script>

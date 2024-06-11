@@ -89,7 +89,7 @@ def eliminar_miembro(request, primary_key):
         miembro.delete()
         return redirect('miembros')
 
-    return render(request, 'registro/miembros/eliminar_miembro.html', {'miembro': miembro})
+    return render(request, 'registro/miembros/eliminar_miembro_modal.html', {'miembro': miembro})
 
 
 @login_required
@@ -141,7 +141,7 @@ def eliminar_mision(request, primary_key):
         mision.delete()
         return redirect('misiones')
 
-    return render(request, 'registro/misiones/eliminar_mision.html', {'mision': mision})
+    return render(request, 'registro/misiones/eliminar_mision_modal.html', {'mision': mision})
 
 
 @login_required
@@ -192,6 +192,7 @@ def eliminar_subsistema(request, primary_key):
     if request.method == 'POST':
         subsistema.delete()
         return redirect('subsistemas')
-    return render(request, 'registro/subsistemas/eliminar_subsistema.html', {'subsistema': subsistema})
+
+    return render(request, 'registro/subsistemas/eliminar_subsistema_modal.html', {'subsistema': subsistema})
 
 
