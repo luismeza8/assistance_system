@@ -13,8 +13,8 @@
     {% block head %}
     {% endblock %}
 </head>
-  <body class='font-montserrat m-0 bg-white grid h-screen' style='grid-template-columns: 250px 1fr; grid-template-rows: 60px 1fr;'>
-    <header class='px-4 flex justify-between items-center bg-secondary' style='grid-column: 2 / 3; grid-row: 1 / 2'>
+  <body class='font-montserrat m-0 bg-white grid h-screen' style='grid-template-columns: 250px 1fr; grid-template-rows: 70px 1fr;'>
+    <header class='px-4 flex justify-between items-center bg-secondary text-primary' style='grid-column: 2 / 3; grid-row: 1 / 2'>
       <h1 class='font-extrabold text-2xl'>Aplicación de Gestión</h1>
       <h3>{{ user.nombre }}</h3>
       {% if user.profile_picture %}
@@ -22,7 +22,7 @@
       {% endif %}
     </header>
 
-    <aside class='m-0 bg-primary text-secondary' style='grid-column: 1 / 2; grid-row: 1 / 3;'>
+    <aside class='m-0 bg-secondary text-primary' style='grid-column: 1 / 2; grid-row: 1 / 3;'>
       <img src="{% static 'images/logo_horus_blanco_sf.png' %}" width=200px style='margin: 1.25rem 0 2.5rem 1.5rem;'>
       <ul class='ml-6 p-0'>
         <li class='flex items-center text-xl mb-10 hover:font-bold cursor-pointer'>
@@ -59,10 +59,12 @@
       </ul>
     </aside>
 
-    <div class='' style='grid-column: 2 / 3; grid-row: 2 / 3;'>
-      <div id='content'>
-        {% block content %}
-        {% endblock %}
+    <div class='bg-secondary'>
+      <div class='bg-white p-4 mr-8 h-full rounded-t-3xl drop-shadow-3xl' style='grid-column: 2 / 3; grid-row: 2 / 3;'>
+        <div id='content'>
+          {% block content %}
+          {% endblock %}
+        </div>
       </div>
     </div>
 
