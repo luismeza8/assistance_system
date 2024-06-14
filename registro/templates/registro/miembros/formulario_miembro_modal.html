@@ -1,0 +1,94 @@
+{% load static %}
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+  <div 
+    id='modal'
+    class='w-full h-screen z-10 fixed flex justify-center items-center'
+    style='background-color: rgba(0, 0, 0, 0.4); left: 0; top: 0;'>
+    <div
+        class='py-8 px-12 flex flex-col items-center bg-white min-w-[40%] w-fit h-fit rounded-xl' >
+      <!-- style='margin-top: 15vh;' -->
+      
+      <h1 class='mb-4 text-2xl'>Editar información de {{ form.instance.nombre }}: </h1>
+      <form enctype="multipart/form-data" action={{ url }} class='w-full' method='POST'>
+        {% csrf_token %}
+        <label class='block'for="">Nombre: </label>
+        {{ form.nombre }}
+        <label class='block' for="">Email: </label>
+        {{ form.email }}
+
+        <div class='flex w-full justify-evenly mb-8'>
+          <label for='{{ form.mision.id_for_label }}' class='block'>Mision: </label>
+          {{ form.mision }}
+          <label for='{{ form.mision.id_for_label }}' class='block'>Subsistema: </label>
+          {{ form.subsistema }}
+        </div>
+
+        <label for={{ form.horas_acordadas.id_for_label }} class='block'>Horas de trabajo acordadas: </label>
+        {{ form.horas_acordadas}}
+        
+        <label class='block' for="">Foto de perfil: </label>
+        {{ form.profile_picture }}
+
+        <label class='block'>Rol: </label>
+        {{ form.role }}
+        <div class='flex justify-end'>
+          <button 
+            class='mr-1 px-4 py-2 bg-secondary text-primary rounded-xl hover:shadow-xl'
+            type='button' onclick='deleteModal()'>
+            Cancelar
+          </button>
+          <button type="submit"
+            class='bg-primary text-secondary px-4 ml-4 rounded-xl hover:shadow-xl'>
+            Aceptar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+<script>
+  function deleteModal() {
+    const modal = document.getElementById('modal');
+    modal.remove();
+  }
+</script>
+
+<style>
+  .text-field {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #1D1B4E;
+    margin-bottom: 2rem;
+  }
+
+  #id_horas_acordadas {
+    margin-bottom: 2rem;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #1D1B4E;
+  }
+
+  #id_profile_picture {
+    margin-bottom: 2rem;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  #id_role {
+    margin-bottom: 2rem;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #1D1B4E;
+    background-color: white;
+  }
+</style>

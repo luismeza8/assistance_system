@@ -68,15 +68,15 @@ class Miembro(AbstractBaseUser, PermissionsMixin):
 
 
     def is_leader(self):
-        return self.role == self.ROLES['L']
+        return self.role == 'L'
 
 
     def is_admin(self):
-        return self.role == self.ROLES['A']
+        return self.role == 'A'
 
 
     def is_member(self):
-        return self.role == self.ROLES['M']
+        return self.role == 'M'
 
     @property
     def is_staff(self):

@@ -7,7 +7,10 @@ from .models import *
 class MiembroForm(forms.ModelForm):
     nombre = forms.CharField(
         label='Nombre',
-        widget=forms.TextInput(attrs={'class': 'nombre'})    
+        widget=forms.TextInput(attrs={'class': 'text-field'})    
+    )
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={'class': 'text-field'})
     )
     mision = forms.ModelMultipleChoiceField(
         label='Mision/es',
@@ -21,10 +24,16 @@ class MiembroForm(forms.ModelForm):
         widget=forms.CheckboxSelectMultiple(attrs={'class': 'checkbox_list'}),
         required=False,
     )
+    # role = forms.ModelChoiceField(
+    #     label='rol',
+    #     queryset=list(Miembro.ROLES.values())
+    # )
+    #
+    # role.widget.attrs.update({'class': 'select'})
 
     class Meta:
         model = Miembro
-        fields = ['nombre', 'mision', 'subsistema', 'horas_acordadas']
+        fields = ['nombre', 'email', 'mision', 'subsistema', 'horas_acordadas', 'profile_picture', 'role']
 
 
 class MisionForm(forms.ModelForm):

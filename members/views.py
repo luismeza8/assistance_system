@@ -56,13 +56,15 @@ def miembros(request):
 @admin_role_required
 def agregar_miembro(request):
     if request.method == 'POST':
-        form = MiembroForm(request.POST)
+        form = MiembroForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('miembros')
+        else:
+            print(form.errors.as_data())
     else:
         form = MiembroForm()
-    return render(request, 'registro/miembros/formulario_miembro.html', {'form': form})
+    return render(request, 'registro/miembros/formulario_miembro_modal.html', {'form': form, 'url': '/agregar_miembro'})
 
 
 @login_required
@@ -72,12 +74,14 @@ def editar_miembro(request, primary_key):
     form = MiembroForm(instance=miembro)
 
     if request.method == 'POST':
-        form = MiembroForm(request.POST, instance=miembro)
+        form = MiembroForm(request.POST, request.FILES, instance=miembro)
         if form.is_valid():
             form.save()
             return redirect('miembros')
+        else:
+            print(form.errors.as_data())
 
-    return render(request, 'registro/miembros/formulario_miembro.html', {'form': form})
+    return render(request, 'registro/miembros/formulario_miembro_modal.html', {'form': form, 'url': f'/editar_miembro/{miembro.pk}'})
 
 
 @login_required

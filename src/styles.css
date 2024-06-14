@@ -39,5 +39,6 @@
     background-color: #E7E7FA;
     color: #1E1D4F;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
   }
 }

@@ -13,10 +13,8 @@
 <div class='m-4 flex flex-row justify-between'>
   <h3 class='mt-2 text-md font-semibold'>Total de miembros: {{ miembros.count }}</h3>
   {% if user.is_admin %}
-    <a href='{% url 'agregar_miembro' %}'>
-      <button class='add-button'>
+    <a hx-get='{% url 'agregar_miembro' %}' hx-target='#modal-place' class='add-button'>
         Agregar miembro
-      </button>
     </a>
   {% endif %}
 </div>
@@ -65,7 +63,9 @@
 
         {% if user.is_admin %}
           <td class='flex flex-row items-center justify-center'>
-            <a class='mx-2 material-symbols-outlined' href='{% url 'editar_miembro' miembro.pk %}'>
+            <a class='mx-2 cursor-pointer material-symbols-outlined' 
+               hx-get='{% url 'editar_miembro' miembro.pk %}'
+               hx-target='#modal-place'>
               edit_square
             </a>
             <a class='mx-2 cursor-pointer material-symbols-outlined' 
