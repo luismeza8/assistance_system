@@ -118,7 +118,7 @@ def agregar_mision(request):
             return redirect('misiones')
     else:
         form = MisionForm()
-    return render(request, 'registro/misiones/formulario_mision.html', {'form': form})
+    return render(request, 'registro/misiones/formulario_mision_modal.html', {'form': form, 'url': f'agregar_mision'})
 
 
 @login_required
@@ -133,7 +133,7 @@ def editar_mision(request, primary_key):
             form.save()
             return redirect('misiones')
     
-    return render(request, 'registro/misiones/formulario_mision.html', {'form': form})
+    return render(request, 'registro/misiones/formulario_mision_modal.html', {'form': form, 'url': f'editar_mision/{primary_key}'})
 
 
 @login_required
@@ -170,7 +170,7 @@ def agregar_subsistema(request):
             return redirect('subsistemas')
     else:
         form = SubsistemaForm()
-        return render(request, 'registro/subsistemas/formulario_subsistema.html', {'form': form})
+        return render(request, 'registro/subsistemas/formulario_subsistema_modal.html', {'form': form, 'url': '/agregar_subsistema'})
 
 
 @login_required
@@ -185,7 +185,7 @@ def editar_subsistema(request, primary_key):
             form.save()
             return redirect('subsistemas')
 
-    return render(request, 'registro/subsistemas/formulario_subsistema.html', {'form': form})
+    return render(request, 'registro/subsistemas/formulario_subsistema_modal.html', {'form': form, 'url': f'/editar_subsistema/{primary_key}'})
 
 
 @login_required

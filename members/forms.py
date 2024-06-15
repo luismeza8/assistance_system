@@ -39,7 +39,7 @@ class MiembroForm(forms.ModelForm):
 class MisionForm(forms.ModelForm):
     nombre = forms.CharField(
         label='Nombre de la mision',
-        widget=forms.TextInput(attrs={'class': 'nombre'})
+        widget=forms.TextInput(attrs={'class': 'text-field'})
     )
     lider = forms.ModelChoiceField(
         label='Lider',
@@ -47,7 +47,7 @@ class MisionForm(forms.ModelForm):
         required=True,
     )
 
-    lider.widget.attrs.update({'class': 'select'})
+    lider.widget.attrs.update({'class': 'text-field'})
 
     class Meta:
         model = Mision
@@ -59,6 +59,17 @@ class MisionForm(forms.ModelForm):
 
 
 class SubsistemaForm(forms.ModelForm):
+    nombre = forms.CharField(
+        label='Nombre del subsistema',
+        widget=forms.TextInput(attrs={'class': 'text-field'})
+    )
+    lider = forms.ModelChoiceField(
+        label='Lider',
+        queryset=Miembro.objects.all(),
+        required=True,
+    )
+
+    lider.widget.attrs.update({'class': 'text-field'})
 
     class Meta:
         model = Subsistema

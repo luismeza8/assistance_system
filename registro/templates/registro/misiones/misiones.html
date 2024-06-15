@@ -11,10 +11,8 @@
 <div class='m-4 flex flex-row justify-between'>
   <h3 class='mt-2 text-md font-semibold'>Total de misiones: {{ misiones.count }}</h3>
   {% if user.is_admin %}
-    <a href='{% url 'agregar_mision' %}'>
-      <button class='add-button'>
-        Agregar mision
-      </button>
+  <a class='cursor-pointer add-button' hx-get='{% url 'agregar_mision' %}' hx-target='#modal-place'>
+    Agregar mision
     </a>
   {% endif %}
 </div>
@@ -46,7 +44,8 @@
       <td>{{ mision.fecha_finalizacion }}</td>
       {% if user.is_admin %}
         <td class='flex flex-row items-center justify-center'>
-          <a class='mx-2 material-symbols-outlined' href='{% url 'editar_mision' mision.pk %}'>
+          <a class='mx-2 cursor-pointer material-symbols-outlined' 
+            hx-get='{% url 'editar_mision' mision.pk %}' hx-target='#modal-place'>
             edit_square
           </a>
           <a class='mx-2 cursor-pointer material-symbols-outlined'

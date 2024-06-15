@@ -9,15 +9,13 @@
 <div class='m-4 flex flex-row justify-between'>
   <h3 class='mt-2 text-md font-semibold'>Total de subsistemas: {{ subsistemas.count }}</h3>
   {% if user.is_admin %}
-    <a href='{% url 'agregar_subsistema' %}'>
-      <button class='add-button'>
+  <a class='add-button' hx-get='{% url 'agregar_subsistema' %}' hx-target='#modal-place'>
         Agregar subsistema
-      </button>
     </a>
   {% endif %}
 </div>
 
-<div class='modal-place'></div>
+<div id='modal-place'></div>
 
 <table class='custom-table'>
     <thead>
@@ -40,12 +38,14 @@
       <td>{{ subsistema.miembro_set.count }}</td>
       {% if user.is_admin %}
         <td class='flex flex-row items-center justify-center'>
-          <a class='mx-2 material-symbols-outlined' href='{% url 'editar_subsistema' subsistema.pk %}'>
+          <a class='mx-2 cursor-pointer material-symbols-outlined' 
+             hx-get='{% url 'editar_subsistema' subsistema.pk %}'
+             hx-target='#modal-place'>
             edit_square
           </a>
           <a class='mx-2 cursor-pointer material-symbols-outlined'
              hx-get='{% url 'eliminar_subsistema' subsistema.pk %}'
-             hx-target='.modal-place'>
+             hx-target='#modal-place'>
               delete
           </a>
         </td>
