@@ -4,12 +4,13 @@ from django.template import loader
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.urls import reverse
 
 from .decorators import *
 from .models import *
 from .forms import *
 
-# Create your views here.
+
 def login_view(request):
     if request.user.is_authenticated:
         return redirect('miembros')
@@ -43,11 +44,7 @@ def access_denied(request):
 @login_required
 def miembros(request):
     miembros = Miembro.objects.all()
-
-    if request.htmx:
-        template = 'registro/miembros/miembros.html'
-    else:
-        template = 'registro/miembros/miembros_full.html'
+    template = 'registro/miembros/miembros.html' if request.htmx else 'registro/miembros/miembros_full.html'
     
     return render(request, template, {'miembros': miembros})
 
@@ -93,17 +90,21 @@ def eliminar_miembro(request, primary_key):
         miembro.delete()
         return redirect('miembros')
 
-    return render(request, 'registro/miembros/eliminar_miembro_modal.html', {'miembro': miembro})
+    title = f'¿Deseas eliminar al miembro {miembro.nombre}?'
+    url = reverse('eliminar_miembro', kwargs={'primary_key': miembro.pk})
+
+    context = {
+        'title': title,
+        'url': url
+    }
+
+    return render(request, 'components/confirmation_modal.html', context)
 
 
 @login_required
 def misiones(request):
     misiones = Mision.objects.all()
-
-    if request.htmx:
-        template = 'registro/misiones/misiones.html'
-    else:
-        template = 'registro/misiones/misiones_full.html'
+    template = 'registro/misiones/misiones.html' if request.htmx else 'registro/misiones/misiones_full.html'
 
     return render(request, template, {'misiones': misiones})
 
@@ -145,17 +146,21 @@ def eliminar_mision(request, primary_key):
         mision.delete()
         return redirect('misiones')
 
-    return render(request, 'registro/misiones/eliminar_mision_modal.html', {'mision': mision})
+    title = f'¿Deseas eliminar la misión {mision.nombre}?'
+    url = reverse('eliminar_mision', kwargs={'primary_key': mision.pk})
+
+    context = {
+        'title': title,
+        'url': url
+    }
+
+    return render(request, 'components/confirmation_modal.html', context)
 
 
 @login_required
 def subsistemas(request):
     subsistemas = Subsistema.objects.all()
-
-    if request.htmx:
-        template = 'registro/subsistemas/subsistemas.html'
-    else:
-        template = 'registro/subsistemas/subsistemas_full.html'
+    template = 'registro/subsistemas/subsistemas.html' if request.htmx else 'registro/subsistemas/subsistemas_full.html'
 
     return render(request, template, {'subsistemas': subsistemas})
 
@@ -197,6 +202,14 @@ def eliminar_subsistema(request, primary_key):
         subsistema.delete()
         return redirect('subsistemas')
 
-    return render(request, 'registro/subsistemas/eliminar_subsistema_modal.html', {'subsistema': subsistema})
+    title = f'¿Deseas eliminar el subsistema {subsistema.nombre}?'
+    url = reverse('eliminar_subsistema', kwargs={'primary_key': subsistema.pk})
+
+    context = {
+        'title': title,
+        'url': url
+    }
+
+    return render(request, 'components/confirmation_modal.html', context)
 
 

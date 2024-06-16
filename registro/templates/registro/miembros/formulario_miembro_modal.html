@@ -13,7 +13,13 @@
         class='py-8 px-12 flex flex-col items-center bg-white min-w-[40%] w-fit h-fit rounded-xl' >
       <!-- style='margin-top: 15vh;' -->
       
-      <h1 class='mb-4 text-2xl'>Editar información de {{ form.instance.nombre }}: </h1>
+      <h1 class='mb-4 text-2xl'>
+        {% if form.instance.email != '' %}
+          Editar información de {{ form.instance.nombre }}: 
+        {% else %}
+          Agregar nuevo miembro
+        {% endif %}
+      </h1>
       <form enctype="multipart/form-data" action={{ url }} class='w-full' method='POST'>
         {% csrf_token %}
         <label class='block'for="">Nombre: </label>
