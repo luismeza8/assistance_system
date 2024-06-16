@@ -10,8 +10,8 @@
 
 {% block content %}
 
-<div class='m-4 flex flex-row justify-between'>
-  <h3 class='mt-2 text-md font-semibold'>Total de miembros: {{ miembros.count }}</h3>
+<div class='mb-[10px] flex flex-row justify-between items-center'>
+  <h3 class='mx-4 text-md font-semibold'>Total de miembros: {{ miembros.count }}</h3>
   {% if user.is_admin %}
     <a hx-get='{% url 'agregar_miembro' %}' hx-target='#modal-place' class='add-button'>
         Agregar miembro
@@ -24,11 +24,12 @@
 <table class='custom-table'>
   <thead>
     <tr>
-      <th style='width: 4%;'>ID</th>
-      <th style='width: 40%'>Nombre</th>
-      <th style='width: 12%;'>Horas trabajadas</th>
-      <th style='width: 18%;'>Misiones</th>
-      <th style='width: 18%'>Subsistemas</th>
+      <!-- <th style='width: 4%;'>ID</th> -->
+      <th style='padding: 0 1rem; width: 28%; text-align: start;'>Miembro</th>
+      <th style='width: 12%;'>Rol</th>
+      <th style='width: 10%;'>Horas trabajadas</th>
+      <th style='width: 16%;'>Misiones</th>
+      <th style='width: 16%'>Subsistemas</th>
       {% if user.is_admin %}
         <th style='width: 8%;'>Acciones</th>
       {% endif %}
@@ -38,17 +39,34 @@
   <tbody>
     {% for miembro in miembros %}
       <tr>
-        <td>{{ miembro.pk }}</td>
+        <!-- <td>{{ miembro.pk }}</td> -->
         <td>
-          {% if user.pk == miembro.pk or user.is_admin %}
-            <a class='cursor-pointer'
-            hx-get='{% url 'registros' miembro.pk %}'
-            hx-target='#content'
-            hx-push-url='true'>
+          <div class='flex items-center'>
+            {% if miembro.profile_picture %}
+              <div class='m-2 mx-4 h-12 w-12 bg-cover bg-center rounded-full shadow-3xl' 
+                style='background-image: url({{ miembro.profile_picture.url }});'></div>
+            {% endif %}
+            {% if user.pk == miembro.pk or user.is_admin %}
+              <a class='cursor-pointer hover:underline'
+              hx-get='{% url 'registros' miembro.pk %}'
+              hx-target='#content'
+              hx-push-url='true'>
+            {% endif %}
+              <div class='flex flex-col justify-center items-start'>
+                <div class='font-semibold'>{{ miembro.nombre }}</div>
+                <div class='block text-xs'>{{ miembro.email }}</div>
+              </div>
+            </a>
+          </div>
+        </td>
+        <td>
+          {% if miembro.role == 'A' %}
+            Administrador
+          {% elif miembro.role == 'L' %}
+            Lider
+          {% else %}
+            Miembro
           {% endif %}
-            {{ miembro.nombre }}
-            <div class='block text-sm'>{{ miembro.email }}</div>
-          </a>
         </td>
         <td>0 / {{ miembro.horas_acordadas }}</td>
         <td>

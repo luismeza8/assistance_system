@@ -5,7 +5,7 @@
 @layer components {
   .custom-table {
     width: 100%;
-    border-spacing: 8px;
+    border-spacing: 6px;
     border-collapse: separate;
   }
 
@@ -23,7 +23,7 @@
     background-color: #E7E7FA;
     color: #1E1D4F;
     text-align: center;
-    height: 2.5rem;
+    height: 4.5rem;
     border-radius: 20px;
   }
 
