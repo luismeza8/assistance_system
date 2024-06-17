@@ -90,7 +90,7 @@ def eliminar_miembro(request, primary_key):
         miembro.delete()
         return redirect('miembros')
 
-    title = f'¿Deseas eliminar al miembro {miembro.nombre}?'
+    title = f'¿Deseas eliminar al miembro {miembro.get_name()}?'
     url = reverse('eliminar_miembro', kwargs={'primary_key': miembro.pk})
 
     context = {

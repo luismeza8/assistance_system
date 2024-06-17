@@ -10,22 +10,33 @@
     class='w-full h-screen z-10 fixed flex justify-center items-center'
     style='background-color: rgba(0, 0, 0, 0.4); left: 0; top: 0;'>
     <div
-        class='py-8 px-12 flex flex-col items-center bg-white min-w-[40%] w-fit h-fit rounded-xl' >
+        class='py-8 px-12 flex flex-col items-center bg-white max-h-[90%] overflow-y-auto min-w-[40%] w-fit h-fit rounded-xl' >
       <!-- style='margin-top: 15vh;' -->
       
       <h1 class='mb-4 text-2xl'>
         {% if form.instance.email != '' %}
-          Editar información de {{ form.instance.nombre }}: 
+          Editar información de {{ form.instance.get_name }}: 
         {% else %}
           Agregar nuevo miembro
         {% endif %}
       </h1>
       <form enctype="multipart/form-data" action={{ url }} class='w-full' method='POST'>
         {% csrf_token %}
-        <label class='block'for="">Nombre: </label>
-        {{ form.nombre }}
-        <label class='block' for="">Email: </label>
+        <div class='flex justify-between'>
+          <div class='mr-2 flex flex-col w-full'>
+            <label class='block'for="">Nombre: </label>
+            {{ form.first_names }}
+          </div>
+          <div class='ml-2 flex flex-col w-full'>
+            <label class='block'for="">Apellidos: </label>
+            {{ form.last_names }}
+          </div>
+        </div>
+        <label class='block' for="">Email:</label>
         {{ form.email }}
+
+        <label class='block' for="">Teléfono:</label>
+        {{ form.phone_number }}
 
         <div class='flex w-full justify-evenly mb-8'>
           <label for='{{ form.mision.id_for_label }}' class='block'>Mision: </label>
@@ -35,7 +46,7 @@
         </div>
 
         <label for={{ form.horas_acordadas.id_for_label }} class='block'>Horas de trabajo acordadas: </label>
-        {{ form.horas_acordadas}}
+        {{ form.hours_per_week }}
         
         <label class='block' for="">Foto de perfil: </label>
         {{ form.profile_picture }}
@@ -71,11 +82,11 @@
     padding: 10px;
     border-radius: 8px;
     border: 2px solid #1D1B4E;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     background-color: white;
   }
 
-  #id_horas_acordadas {
+  #id_hours_per_week {
     margin-bottom: 2rem;
     width: 100%;
     padding: 10px;

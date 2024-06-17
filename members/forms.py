@@ -5,8 +5,16 @@ from .models import *
 
 
 class MiembroForm(forms.ModelForm):
-    nombre = forms.CharField(
-        label='Nombre',
+    first_names = forms.CharField(
+        label='first_names',
+        widget=forms.TextInput(attrs={'class': 'text-field'})    
+    )
+    last_names = forms.CharField(
+        label='last_names',
+        widget=forms.TextInput(attrs={'class': 'text-field'})    
+    )
+    phone_number = forms.CharField(
+        label='phone_number',
         widget=forms.TextInput(attrs={'class': 'text-field'})    
     )
     email = forms.EmailField(
@@ -33,8 +41,7 @@ class MiembroForm(forms.ModelForm):
 
     class Meta:
         model = Miembro
-        fields = ['nombre', 'email', 'mision', 'subsistema', 'horas_acordadas', 'profile_picture', 'role']
-
+        fields = '__all__'
 
 class MisionForm(forms.ModelForm):
     nombre = forms.CharField(

@@ -51,8 +51,9 @@
               hx-push-url='true'>
             {% endif %}
               <div class='flex flex-col justify-center items-start'>
-                <div class='font-semibold'>{{ miembro.nombre }}</div>
+                <div class='font-semibold'>{{ miembro.get_full_name }}</div>
                 <div class='block text-xs'>{{ miembro.email }}</div>
+                <div class='block text-xs'>{{ miembro.phone_number }}</div>
               </div>
             </a>
           </div>
@@ -66,7 +67,7 @@
             Miembro
           {% endif %}
         </td>
-        <td>0 / {{ miembro.horas_acordadas }}</td>
+        <td>0 / {{ miembro.hours_per_week }}</td>
         <td>
           {% for mision in miembro.mision.all %}
             {{ mision.nombre }}{% if not forloop.last %}, {% endif %}
@@ -100,3 +101,6 @@
 {% endblock %}
 </html>
 
+<script>
+  console.log('{{ user.subsistema.all }}')
+</script>

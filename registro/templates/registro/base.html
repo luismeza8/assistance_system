@@ -17,9 +17,9 @@
     <header class='px-8 flex justify-between items-center bg-secondary text-primary' style='grid-column: 2 / 3; grid-row: 1 / 2'>
       <h1 class='font-extrabold text-2xl'>Aplicación de Gestión</h1>
       <div class='flex items-center'>
-        <h3 class='px-2 text-md'>{{ user.nombre }}</h3>
+        <h3 class='px-2 text-md'>{{ user.get_name }}</h3>
         {% if user.profile_picture %}
-          <div class='h-[50px] w-[50px] bg-cover bg-center rounded-full shadow-3xl' style='background-image: url({{ user.profile_picture.url }});'></div>
+          <div class='h-[50px] w-[50px] bg-cover bg-center rounded-full shadow-2xl' style='background-image: url({{ user.profile_picture.url }});'></div>
         {% endif %}
       </div>
     </header>

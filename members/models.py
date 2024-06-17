@@ -50,21 +50,34 @@ class Miembro(AbstractBaseUser, PermissionsMixin):
         'A': 'ADMIN'
     }
 
-    nombre = models.CharField(max_length=100)
+    first_names = models.CharField(max_length=100, default='')
+    last_names = models.CharField(max_length=100, default='')
+    phone_number = models.CharField(max_length=12, default='')
     email = models.EmailField(max_length=255, unique=True)
     mision = models.ManyToManyField(Mision)
     subsistema = models.ManyToManyField(Subsistema)
-    horas_acordadas = models.IntegerField(default=0)
+    hours_per_week = models.IntegerField(default=0)
     is_admin = models.BooleanField(default=False)
     role = models.CharField(max_length=1, choices=ROLES, default='M')
-    profile_picture = models.ImageField(upload_to='users_profile_picture', default='')
+    profile_picture = models.ImageField(upload_to='users_profile_picture', default='users_profile_picture/default_profile_picture.jpg')
+    schedule = models.ImageField(upload_to='schedules', blank=True)
 
     objects = MiembroManager()
 
     USERNAME_FIELD = 'email'
 
     def __str__(self):
-        return self.nombre
+        return f'{self.first_names} {self.last_names}'
+
+
+    def get_full_name(self):
+        return f'{self.first_names} {self.last_names}'
+
+
+    def get_name(self):
+        first_name = self.first_names.split()[0]
+        last_name = self.last_names.split()[0]
+        return f'{first_name} {last_name}'
 
 
     def is_leader(self):
