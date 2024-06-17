@@ -42,6 +42,7 @@ class MiembroForm(forms.ModelForm):
     class Meta:
         model = Miembro
         fields = '__all__'
+        exclude = ('password',)
 
 class MisionForm(forms.ModelForm):
     nombre = forms.CharField(

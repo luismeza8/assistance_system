@@ -4,4 +4,6 @@ node_modules/
 *.pot
 *.pyc
 __pycache__/
-media
+**/__pycache__/
+media/users_profile_picture/*
+!media/users_profile_picture/default_profile_picture.jpg
