@@ -4,41 +4,35 @@
 
 @layer components {
   .custom-table {
-    width: 100%;
     border-spacing: 6px;
-    border-collapse: separate;
+    @apply w-full border-separate;
   }
 
   .custom-table thead tr {
-    height: 2.5rem;
+    @apply h-12;
   }
 
   .custom-table th {
-    background-color: #1E1D4F;
-    color: #E7E7FA;
-    border-radius: 18px;
+    @apply px-8 text-center bg-primary text-secondary rounded-3xl;
   }
 
   .custom-table td{
-    background-color: #E7E7FA;
-    color: #1E1D4F;
-    text-align: center;
-    height: 4.5rem;
-    border-radius: 20px;
+    @apply bg-secondary text-primary text-center h-16 rounded-3xl;
   }
 
-  .add-button {
-    background-color: #1E1D4F;
-    color: #E7E7FA;
-    font-size: 0.85rem;
-    padding: 0.6rem 1.2rem 0.6rem 1.2rem;
-    border-radius: 0.8rem;
+  .above-table {
+    @apply mb-[10px] flex flex-row justify-between items-center;
   }
 
-  .add-button:hover {
-    background-color: #E7E7FA;
-    color: #1E1D4F;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
+  .above-table h3 {
+    @apply mx-4 font-semibold;
+  }
+
+  .above-table a {
+    @apply mx-2 p-2 px-4 bg-primary text-secondary text-sm rounded-md;
+  }
+
+  .above-table a:hover {
+    @apply bg-secondary text-primary shadow-xl cursor-pointer;
   }
 }

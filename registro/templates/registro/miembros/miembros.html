@@ -10,10 +10,10 @@
 
 {% block content %}
 
-<div class='mb-[10px] flex flex-row justify-between items-center'>
-  <h3 class='mx-4 text-md font-semibold'>Total de miembros: {{ miembros.count }}</h3>
+<div class='above-table'>
+  <h3>Total de miembros: {{ miembros.count }}</h3>
   {% if user.is_admin %}
-    <a hx-get='{% url 'agregar_miembro' %}' hx-target='#modal-place' class='add-button'>
+    <a hx-get='{% url 'agregar_miembro' %}' hx-target='#modal-place'>
         Agregar miembro
     </a>
   {% endif %}
@@ -24,12 +24,11 @@
 <table class='custom-table'>
   <thead>
     <tr>
-      <!-- <th style='width: 4%;'>ID</th> -->
-      <th style='padding: 0 1rem; width: 28%; text-align: start;'>Miembro</th>
-      <th style='width: 12%;'>Rol</th>
-      <th style='width: 10%;'>Horas trabajadas</th>
-      <th style='width: 16%;'>Misiones</th>
-      <th style='width: 16%'>Subsistemas</th>
+      <th class='!text-start'>Miembro</th>
+      <th class='w-40 w-max-[10rem]'>Rol</th>
+      <th class='w-[8%] max-w-[8%]'>Hrs. trabajadas</th>
+      <th class='w-[16%] max-w-[16%]'>Misiones</th>
+      <th class='w-[16%] max-w-[16%]'>Subsistemas</th>
       {% if user.is_admin %}
         <th style='width: 8%;'>Acciones</th>
       {% endif %}
@@ -39,7 +38,6 @@
   <tbody>
     {% for miembro in miembros %}
       <tr>
-        <!-- <td>{{ miembro.pk }}</td> -->
         <td>
           <div class='flex items-center'>
             {% if miembro.profile_picture %}

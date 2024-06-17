@@ -6,10 +6,10 @@
 
 {% block content %}
 
-<div class='m-4 flex flex-row justify-between'>
-  <h3 class='mt-2 text-md font-semibold'>Total de subsistemas: {{ subsistemas.count }}</h3>
+<div class='above-table'>
+  <h3>Total de subsistemas: {{ subsistemas.count }}</h3>
   {% if user.is_admin %}
-  <a class='add-button' hx-get='{% url 'agregar_subsistema' %}' hx-target='#modal-place'>
+  <a hx-get='{% url 'agregar_subsistema' %}' hx-target='#modal-place'>
         Agregar subsistema
     </a>
   {% endif %}
@@ -20,7 +20,6 @@
 <table class='custom-table'>
     <thead>
       <tr>
-        <th style='width: 4%;'>ID</th>
         <th>Nombre</th>
         <th>Lider</th>
         <th style='width: 10%;'>N. miembros</th>
@@ -32,7 +31,6 @@
   <tbody>
     {% for subsistema in subsistemas %}
     <tr>
-      <td>{{ subsistema.pk }}</td>
       <td>{{ subsistema.nombre }}</td>
       <td>{{ subsistema.lider.nombre }}</td>
       <td>{{ subsistema.miembro_set.count }}</td>

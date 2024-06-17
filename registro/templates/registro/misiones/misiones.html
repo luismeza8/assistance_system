@@ -8,12 +8,12 @@
 </head>
 
 {% block content %}
-<div class='m-4 flex flex-row justify-between'>
-  <h3 class='mt-2 text-md font-semibold'>Total de misiones: {{ misiones.count }}</h3>
+<div class='above-table'>
+  <h3>Total de misiones: {{ misiones.count }}</h3>
   {% if user.is_admin %}
-  <a class='cursor-pointer add-button' hx-get='{% url 'agregar_mision' %}' hx-target='#modal-place'>
+  <a hx-get='{% url 'agregar_mision' %}' hx-target='#modal-place'>
     Agregar mision
-    </a>
+  </a>
   {% endif %}
 </div>
 
@@ -21,22 +21,20 @@
 
 <table class='custom-table'>
     <thead>
-    <tr>
-      <th style='width: 4%; border-top-left-radius: 18px;'>ID</th>
-      <th>Nombre</th>
-      <th>Lider</th>
-      <th style='width: 10%;'>N. Miembros</th>
-      <th style='width: 14%;'>Fecha de inicio</th>
-      <th style='width: 14%;'>Fecha de finalizacion</th>
-      {% if user.is_admin %}
-        <th style='width: 8%;border-top-right-radius: 18px;'>Acciones</th>
-      {% endif %}
-    </tr>
+      <tr>
+        <th>Nombre</th>
+        <th>Lider</th>
+        <th style='width: 10%;'>N. Miembros</th>
+        <th style='width: 14%;'>Fecha de inicio</th>
+        <th style='width: 14%;'>Fecha de finalizacion</th>
+        {% if user.is_admin %}
+          <th style='width: 8%;border-top-right-radius: 18px;'>Acciones</th>
+        {% endif %}
+      </tr>
     </thead>
   <tbody>
     {% for mision in misiones %}
     <tr>
-      <td>{{ mision.pk }} </td>
       <td>{{ mision.nombre }}</td>
       <td>{{ mision.lider.nombre }}</td>
       <td>{{ mision.miembro_set.count }}</td>
@@ -45,19 +43,19 @@
       {% if user.is_admin %}
         <td class='flex flex-row items-center justify-center'>
           <a class='mx-2 cursor-pointer material-symbols-outlined' 
-            hx-get='{% url 'editar_mision' mision.pk %}' hx-target='#modal-place'>
+            hx-get='{% url 'editar_mision' mision.pk %}'
+            hx-target='#modal-place'>
             edit_square
           </a>
           <a class='mx-2 cursor-pointer material-symbols-outlined'
-             hx-get='{% url 'eliminar_mision' mision.pk %}'
-             hx-target='#modal-place'>
-              delete
+            hx-get='{% url 'eliminar_mision' mision.pk %}'
+            hx-target='#modal-place'>
+            delete
           </a>
         </td>
       {% endif %}
     </tr>
     {% endfor %}
-
   </tbody>
 </table>
 {% endblock %}
