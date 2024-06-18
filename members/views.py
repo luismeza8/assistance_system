@@ -5,6 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.urls import reverse
+import secrets
 
 from .decorators import *
 from .models import *
@@ -55,6 +56,11 @@ def agregar_miembro(request):
     if request.method == 'POST':
         form = MiembroForm(request.POST, request.FILES)
         if form.is_valid():
+            password = secrets.token_urlsafe(10)
+            form.instance.set_password(password)
+
+            messages.success(request, f'La contraseña de {form.instance.get_name()} es: {password}')
+
             form.save()
             return redirect('miembros')
         else:

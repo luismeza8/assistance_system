@@ -17,9 +17,24 @@
         Agregar miembro
     </a>
   {% endif %}
+  {% if messages %}
+    {% for message in messages %}
+      <div 
+        id='modal'
+        class='w-full h-full z-10 fixed flex justify-center'
+        style='background-color: rgba(0, 0, 0, 0.4); left: 0; top: 0;'>
+        <div class='p-8 flex flex-col items-center bg-white w-fit h-fit rounded-xl'
+          style='margin-top: 15vh;'>
+          <h1 class='font-bold text-2xl'>{{ message }}</h1>
+          <a onclick='deleteModal()'>Cerrar</a>
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
 </div>
 
 <div id='modal-place'></div>
+
 
 <table class='custom-table'>
   <thead>
@@ -35,72 +50,75 @@
     </tr>
   </thead>
 
-  <tbody>
-    {% for miembro in miembros %}
-      <tr>
-        <td>
-          <div class='flex items-center'>
-            {% if miembro.profile_picture %}
-              <div class='m-2 mx-4 h-12 w-12 bg-cover bg-center rounded-full shadow-3xl' 
-                style='background-image: url({{ miembro.profile_picture.url }});'></div>
-            {% endif %}
-            {% if user.pk == miembro.pk or user.is_admin %}
-              <a class='cursor-pointer hover:underline'
-              hx-get='{% url 'registros' miembro.pk %}'
-              hx-target='#content'
-              hx-push-url='true'>
-            {% endif %}
-              <div class='flex flex-col justify-center items-start'>
-                <div class='font-semibold'>{{ miembro.get_full_name }}</div>
-                <div class='block text-xs'>{{ miembro.email }}</div>
-                <div class='block text-xs'>{{ miembro.phone_number }}</div>
-              </div>
-            </a>
-          </div>
-        </td>
-        <td>
-          {% if miembro.role == 'A' %}
-            Administrador
-          {% elif miembro.role == 'L' %}
-            Lider
-          {% else %}
-            Miembro
-          {% endif %}
-        </td>
-        <td>0 / {{ miembro.hours_per_week }}</td>
-        <td>
-          {% for mision in miembro.mision.all %}
-            {{ mision.nombre }}{% if not forloop.last %}, {% endif %}
-          {% endfor %}
-        </td>
-        <td>
-          {% for subsistema in miembro.subsistema.all %}
-            {{ subsistema.nombre }}{% if not forloop.last %}, {% endif %}
-          {% endfor %}
-        </td>
-
-        {% if user.is_admin %}
-          <td class='flex flex-row items-center justify-center'>
-            <a class='mx-2 cursor-pointer material-symbols-outlined' 
-               hx-get='{% url 'editar_miembro' miembro.pk %}'
-               hx-target='#modal-place'>
-              edit_square
-            </a>
-            <a class='mx-2 cursor-pointer material-symbols-outlined' 
-             hx-get='{% url 'eliminar_miembro' miembro.pk %}'
-             hx-target='#modal-place'>
-              delete
-            </a>
+    <tbody>
+      {% for miembro in miembros %}
+        <tr>
+          <td>
+            <div class='flex items-center'>
+              {% if miembro.profile_picture %}
+                <div class='m-2 mx-4 h-12 w-12 bg-cover bg-center rounded-full shadow-3xl' 
+                  style='background-image: url({{ miembro.profile_picture.url }});'></div>
+              {% endif %}
+              {% if user.pk == miembro.pk or user.is_admin %}
+                <a class='cursor-pointer hover:underline'
+                hx-get='{% url 'registros' miembro.pk %}'
+                hx-target='#content'
+                hx-push-url='true'>
+              {% endif %}
+                <div class='flex flex-col justify-center items-start'>
+                  <div class='font-semibold'>{{ miembro.get_full_name }}</div>
+                  <div class='block text-xs'>{{ miembro.email }}</div>
+                  <div class='block text-xs'>{{ miembro.phone_number }}</div>
+                </div>
+              </a>
+            </div>
           </td>
-        {% endif %}
+          <td>
+            {% if miembro.role == 'A' %}
+              Administrador
+            {% elif miembro.role == 'L' %}
+              Lider
+            {% else %}
+              Miembro
+            {% endif %}
+          </td>
+          <td>0 / {{ miembro.hours_per_week }}</td>
+          <td>
+            {% for mision in miembro.mision.all %}
+              {{ mision.nombre }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+          </td>
+          <td>
+            {% for subsistema in miembro.subsistema.all %}
+              {{ subsistema.nombre }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+          </td>
 
-      </tr>
-    {% endfor %}
-  </tbody>
+          {% if user.is_admin %}
+            <td class='flex flex-row items-center justify-center'>
+              <a class='mx-2 cursor-pointer material-symbols-outlined' 
+                 hx-get='{% url 'editar_miembro' miembro.pk %}'
+                 hx-target='#modal-place'>
+                edit_square
+              </a>
+              <a class='mx-2 cursor-pointer material-symbols-outlined' 
+               hx-get='{% url 'eliminar_miembro' miembro.pk %}'
+               hx-target='#modal-place'>
+                delete
+              </a>
+            </td>
+          {% endif %}
+
+        </tr>
+      {% endfor %}
+    </tbody>
 </table>
 {% endblock %}
 </html>
 
 <script>
-  console.log('{{ user.subsistema.all }}')
+  function deleteModal() {
+    const modal = document.getElementById('modal');
+    modal.remove();
+  }
 </script>

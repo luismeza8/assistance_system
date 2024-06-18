@@ -35,4 +35,8 @@
   .above-table a:hover {
     @apply bg-secondary text-primary shadow-xl cursor-pointer;
   }
+
+  .message-modal {
+    @apply bg-primary p-4 z-10 w-[80%] h-[10%] fixed flex justify-center;
+  }
 }
