@@ -35,85 +35,83 @@
 
 <div id='modal-place'></div>
 
-<div class='table-wrapper'>
-  <table class='custom-table'>
-    <thead>
-      <tr>
-        <th class='!text-start'>Miembro</th>
-        <th class='w-40 w-max-[10rem]'>Rol</th>
-        <th class='w-[8%] max-w-[8%]'>Hrs. trabajadas</th>
-        <th class='w-[16%] max-w-[16%]'>Misiones</th>
-        <th class='w-[16%] max-w-[16%]'>Subsistemas</th>
-        {% if user.is_admin %}
-          <th style='width: 8%;'>Acciones</th>
-        {% endif %}
-      </tr>
-    </thead>
+<table class='custom-table'>
+  <thead>
+    <tr>
+      <th class='!text-start'>Miembro</th>
+      <th class='w-40 w-max-[10rem]'>Rol</th>
+      <th class='w-[8%] max-w-[8%]'>Hrs. trabajadas</th>
+      <th class='w-[16%] max-w-[16%]'>Misiones</th>
+      <th class='w-[16%] max-w-[16%]'>Subsistemas</th>
+      {% if user.is_admin %}
+        <th style='width: 8%;'>Acciones</th>
+      {% endif %}
+    </tr>
+  </thead>
 
-      <tbody>
-        {% for miembro in miembros %}
-          <tr>
-            <td>
-              <div class='flex items-center'>
-                {% if miembro.profile_picture %}
-                  <div class='m-2 mx-4 h-12 w-12 bg-cover bg-center rounded-full shadow-3xl' 
-                    style='background-image: url({{ miembro.profile_picture.url }});'></div>
-                {% endif %}
-                {% if user.pk == miembro.pk or user.is_admin %}
-                  <a class='cursor-pointer hover:underline'
-                  hx-get='{% url 'registros' miembro.pk %}'
-                  hx-target='#content'
-                  hx-push-url='true'>
-                {% endif %}
-                  <div class='flex flex-col justify-center items-start'>
-                    <div class='font-semibold'>{{ miembro.get_full_name }}</div>
-                    <div class='block text-xs'>{{ miembro.email }}</div>
-                    <div class='block text-xs'>{{ miembro.phone_number }}</div>
-                  </div>
-                </a>
-              </div>
-            </td>
-            <td>
-              {% if miembro.role == 'A' %}
-                Administrador
-              {% elif miembro.role == 'L' %}
-                Lider
-              {% else %}
-                Miembro
+    <tbody>
+      {% for miembro in miembros %}
+        <tr>
+          <td>
+            <div class='flex items-center'>
+              {% if miembro.profile_picture %}
+                <div class='m-2 mx-4 h-12 w-12 bg-cover bg-center rounded-full shadow-3xl' 
+                  style='background-image: url({{ miembro.profile_picture.url }});'></div>
               {% endif %}
-            </td>
-            <td>0 / {{ miembro.hours_per_week }}</td>
-            <td>
-              {% for mision in miembro.mision.all %}
-                {{ mision.nombre }}{% if not forloop.last %}, {% endif %}
-              {% endfor %}
-            </td>
-            <td>
-              {% for subsistema in miembro.subsistema.all %}
-                {{ subsistema.nombre }}{% if not forloop.last %}, {% endif %}
-              {% endfor %}
-            </td>
-
-            {% if user.is_admin %}
-              <td class='flex flex-row items-center justify-center'>
-                <a class='mx-2 cursor-pointer material-symbols-outlined' 
-                   hx-get='{% url 'editar_miembro' miembro.pk %}'
-                   hx-target='#modal-place'>
-                  edit_square
-                </a>
-                <a class='mx-2 cursor-pointer material-symbols-outlined' 
-                 hx-get='{% url 'eliminar_miembro' miembro.pk %}'
-                 hx-target='#modal-place'>
-                  delete
-                </a>
-              </td>
+              {% if user.pk == miembro.pk or user.is_admin %}
+                <a class='cursor-pointer hover:underline'
+                hx-get='{% url 'registros' miembro.pk %}'
+                hx-target='#content'
+                hx-push-url='true'>
+              {% endif %}
+                <div class='flex flex-col justify-center items-start'>
+                  <div class='font-semibold'>{{ miembro.get_full_name }}</div>
+                  <div class='block text-xs'>{{ miembro.email }}</div>
+                  <div class='block text-xs'>{{ miembro.phone_number }}</div>
+                </div>
+              </a>
+            </div>
+          </td>
+          <td>
+            {% if miembro.role == 'A' %}
+              Administrador
+            {% elif miembro.role == 'L' %}
+              Lider
+            {% else %}
+              Miembro
             {% endif %}
+          </td>
+          <td>0 / {{ miembro.hours_per_week }}</td>
+          <td>
+            {% for mision in miembro.mision.all %}
+              {{ mision.nombre }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+          </td>
+          <td>
+            {% for subsistema in miembro.subsistema.all %}
+              {{ subsistema.nombre }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+          </td>
 
-          </tr>
-        {% endfor %}
-      </tbody>
-  </table>
-</div>
+          {% if user.is_admin %}
+            <td class='flex flex-row items-center justify-center'>
+              <a class='mx-2 cursor-pointer material-symbols-outlined' 
+                 hx-get='{% url 'editar_miembro' miembro.pk %}'
+                 hx-target='#modal-place'>
+                edit_square
+              </a>
+              <a class='mx-2 cursor-pointer material-symbols-outlined' 
+               hx-get='{% url 'eliminar_miembro' miembro.pk %}'
+               hx-target='#modal-place'>
+                delete
+              </a>
+            </td>
+          {% endif %}
+
+        </tr>
+      {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}
 </html>
