@@ -8,13 +8,19 @@
     @apply w-full block overflow-auto border-separate;
   }
 
+  .custom-table thead {
+    position: sticky;
+    top: 0px;
+    @apply bg-white;
+  }
+
   .custom-table thead tr {
+    position: sticky;
+    top: 6px;
     @apply h-12;
   }
 
   .custom-table th {
-    position: sticky;
-    top: 6px;
     @apply px-8 text-center bg-primary text-secondary rounded-3xl;
   }
 
