@@ -58,9 +58,10 @@
       </div>
     </aside>
 
-    <div class='bg-secondary'>
-      <div class='bg-white p-4 mr-8 h-full rounded-t-3xl drop-shadow-3xl' style='grid-column: 2 / 3; grid-row: 2 / 3;'>
-        <div id='content h-full max-h-full overflow-y-auto'>
+    <div class='bg-secondary overflow-y-auto'>
+      <div class='bg-white p-4 mr-8 h-full rounded-t-3xl drop-shadow-3xl'
+        style='grid-column: 2 / 3; grid-row: 2 / 3;'>
+        <div class='h-full overflow-y-auto' id='content'>
           {% block content %}
           {% endblock %}
         </div>

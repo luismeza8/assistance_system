@@ -3,8 +3,12 @@
 @tailwind utilities;
 
 @layer components {
+  .table-wrapper {
+  }
+
   .custom-table {
     border-spacing: 6px;
+    /* overflow-y: auto; */
     @apply w-full border-separate;
   }
 
@@ -13,12 +17,15 @@
   }
 
   .custom-table th {
+    position: sticky;
+    top: 0;
     @apply px-8 text-center bg-primary text-secondary rounded-3xl;
   }
 
   .custom-table td{
     @apply bg-secondary text-primary text-center h-16 rounded-3xl;
   }
+
 
   .above-table {
     @apply mb-[10px] flex flex-row justify-between items-center;
