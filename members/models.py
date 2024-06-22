@@ -110,7 +110,6 @@ class Miembro(AbstractBaseUser, PermissionsMixin):
             return 0
 
         segundos_trabajados = 0
-        horas_trabajadas = 0
 
         for i, registro in enumerate(registros_semana_actual):
             if len(registros_semana_actual) > i+1:
@@ -126,10 +125,16 @@ class Miembro(AbstractBaseUser, PermissionsMixin):
 
     def get_hours_worked_this_week(self):
         seconds = self.seconds_worked_this_week()
-        return int(seconds // 3600)
+        hours = int(seconds // 3600)
+        return f'0{hours}' if len(str(hours)) == 1 else hours
 
 
     def get_minutes_worked_this_week(self):
         seconds = self.seconds_worked_this_week()
-        return int((seconds / 3600) % 1 * 60)
+        minutes = int((seconds / 3600) % 1 * 60)
+        return f'0{minutes}' if len(str(minutes)) == 1 else minutes
+
+
+    def get_time_worked_this_week(self):
+        return f'{self.get_hours_worked_this_week()}:{self.get_minutes_worked_this_week()}'
 

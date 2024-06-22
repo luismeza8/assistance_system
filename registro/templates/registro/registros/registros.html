@@ -1,13 +1,17 @@
 {% load static %}
 
 {% block head %}
-  <title>{{ registros.0.miembro.get_name }}</title>
+  <title>{{ miembro.get_name }}</title>
 {% endblock %}
 
 {% block content %}
-  <body>
+<body>
+  <div class='flex justify-start'>
+<h1 class='px-4 mb-2 text-2xl font-bold'>Registros de {{ miembro.get_name }}</h1>
+  </div>
   <div class='above-table'>
     <h3>Total de registros: {{ registros.count }}</h3>
+    <h3>Horas trabajadas: {{ miembro.get_time_worked_this_week }}</h3>
   </div>
   <table style='display: table !important;' class='custom-table'>
     <thead>
@@ -30,5 +34,6 @@
         </tr>
       {% endfor %}
     </tbody>
-  </table>
+  </table> 
+</body>
 {% endblock %}

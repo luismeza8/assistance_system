@@ -82,7 +82,7 @@
             {% endif %}
           </td>
           <td>
-            {{ miembro.get_hours_worked_this_week }}:{{ miembro.get_minutes_worked_this_week }} / {{ miembro.hours_per_week }}:00
+            {{ miembro.get_time_worked_this_week }} / {{ miembro.hours_per_week }}:00
           </td>
           <td>
             {% for mision in miembro.mision.all %}
