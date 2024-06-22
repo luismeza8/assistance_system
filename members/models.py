@@ -1,5 +1,8 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from datetime import timedelta
+
 
 # Create your models here.
 class MiembroManager(BaseUserManager):
@@ -96,25 +99,37 @@ class Miembro(AbstractBaseUser, PermissionsMixin):
         return self.is_admin
 
 
-    def horas_trabajadas_esta_semana(self):
+    def seconds_worked_this_week(self):
+        from registro.models import Registro
         hoy = timezone.now().date()
         inicio_semana = hoy - timedelta(days=hoy.weekday())
         fin_semana = inicio_semana + timedelta(days=6)
         registros_semana_actual = Registro.objects.filter(miembro=self).filter(fecha__range=[inicio_semana, fin_semana])
+
         if len(registros_semana_actual) < 2:
             return 0
+
         segundos_trabajados = 0
         horas_trabajadas = 0
 
         for i, registro in enumerate(registros_semana_actual):
-            if registro.tipo == 'E' and registros_semana_actual[i+1].tipo == 'S':
-                entrada = registro
-                salida = registros_semana_actual[i+1]
-                diferencia = salida.fecha - entrada.fecha
-                diferencia_en_segundos = diferencia.total_seconds()
-                segundos_trabajados += diferencia_en_segundos
+            if len(registros_semana_actual) > i+1:
+                if registro.tipo == 'E' and registros_semana_actual[i+1].tipo == 'S':
+                    entrada = registro
+                    salida = registros_semana_actual[i+1]
+                    diferencia = salida.fecha - entrada.fecha
+                    diferencia_en_segundos = diferencia.total_seconds()
+                    segundos_trabajados += diferencia_en_segundos
 
-        horas_trabajadas = int(segundos_trabajados // 3600)
+        return segundos_trabajados
 
-        return horas_trabajadas
+
+    def get_hours_worked_this_week(self):
+        seconds = self.seconds_worked_this_week()
+        return int(seconds // 3600)
+
+
+    def get_minutes_worked_this_week(self):
+        seconds = self.seconds_worked_this_week()
+        return int((seconds / 3600) % 1 * 60)
 

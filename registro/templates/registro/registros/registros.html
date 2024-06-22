@@ -1,7 +1,7 @@
 {% load static %}
 
 {% block head %}
-  <title>{{ registros.0.miembro }}</title>
+  <title>{{ registros.0.miembro.get_name }}</title>
 {% endblock %}
 
 {% block content %}
@@ -9,10 +9,9 @@
   <div class='above-table'>
     <h3>Total de registros: {{ registros.count }}</h3>
   </div>
-  <table class='custom-table'>
+  <table style='display: table !important;' class='custom-table'>
     <thead>
       <tr>
-        <th style='width: 4%;'>ID</th>
         <th>Tipo</th>
         <th>Fecha</th>
         <th>Hora</th>
@@ -21,18 +20,15 @@
     <tbody>
       {% for registro in registros %}
         <tr>
-          <td>{{ registro.pk }}</td>
           {% if registro.tipo == 'E' %}
             <td>Entrada</td>
           {% elif registro.tipo == 'S' %}
             <td>Salida</td>
           {% endif %}
-          <td>{{ registro.fecha.date }}</td>
+          <td>{{ registro.get_full_date }}</td>
           <td>{{ registro.fecha.time }}</td>
         </tr>
       {% endfor %}
     </tbody>
-
   </table>
-
 {% endblock %}

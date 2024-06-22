@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.template import loader
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -10,7 +9,6 @@ import secrets
 from .decorators import *
 from .models import *
 from .forms import *
-
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -38,7 +36,7 @@ def logout_view(request):
 
 
 @login_required
-def access_denied(request):
+def access_denied(_):
     return HttpResponse('nop')
 
 
