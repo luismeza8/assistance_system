@@ -24,4 +24,6 @@ urlpatterns = [
     path('agregar_subsistema', views.agregar_subsistema, name='agregar_subsistema'),
     path('editar_subsistema/<int:primary_key>', views.editar_subsistema, name='editar_subsistema'),
     path('eliminar_subsistema/<int:primary_key>', views.eliminar_subsistema, name='eliminar_subsistema'),
+
+    path('view_image/<path:image_url>', views.view_image, name='view_image'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -41,6 +41,15 @@ def access_denied(_):
 
 
 @login_required
+def view_image(request, image_url):
+    print(image_url[1:])
+    context = {
+        'image_url': image_url[1:],
+    }
+    return render(request, 'components/view_image.html', context)
+
+
+@login_required
 def miembros(request):
     miembros = Miembro.objects.all()
     template = 'registro/miembros/miembros.html' if request.htmx else 'registro/miembros/miembros_full.html'

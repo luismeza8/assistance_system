@@ -1,0 +1,23 @@
+{% load static %}
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+
+<script>
+  function deleteModal() {
+    const modal = document.getElementById('modal');
+    modal.remove();
+  }
+</script>
+
+<html>
+  <div 
+    id='modal'
+    class='w-full h-screen z-10 fixed flex justify-center'
+    style='background-color: rgba(0, 0, 0, 0.4); left: 0; top: 0;'
+    onclick='deleteModal()'>
+    <div class='flex justify-center items-center'>
+      <img src='{{ image_url }}'>
+    </div>
+  </div>
+</html>

@@ -55,8 +55,11 @@
           <td>
             <div class='flex items-center'>
               {% if miembro.profile_picture %}
-                <div class='m-2 mx-4 h-12 w-12 bg-cover bg-center rounded-full shadow-3xl' 
-                  style='background-image: url({{ miembro.profile_picture.url }});'></div>
+                <a class='m-2 mx-4 h-12 w-12 bg-cover bg-center rounded-full shadow-3xl cursor-pointer' 
+                  style='background-image: url({{ miembro.profile_picture.url }});'
+                   hx-get='{% url 'view_image' miembro.profile_picture.url %}'
+                   hx-target='#modal-place'
+                   ></a>
               {% endif %}
               {% if user.pk == miembro.pk or user.is_admin %}
                 <a class='cursor-pointer hover:underline'
