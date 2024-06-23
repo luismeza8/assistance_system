@@ -51,18 +51,24 @@
           </a>
         </div>
 
-        <a href={% url 'logout' %} class='mb-4 flex items-center text-xl hover:font-bold cursor-pointer'>
-          <div class='mr-2 material-icons'>logout</div>
-          <div class='text-base'>Cerrar sesión</div>
-        </a>
+        <div>
+          <a class='mb-4 flex items-center text-xl hover:font-semibold cursor-pointer'>
+            <div class='mr-2 material-icons'>password</div>
+            <div class='text-base'>Asignar contraseña</div>
+          </a>
+          <a href={% url 'logout' %} class='mb-4 flex items-center text-xl hover:font-bold cursor-pointer'>
+            <div class='mr-2 material-icons'>logout</div>
+            <div class='text-base'>Cerrar sesión</div>
+          </a>
+        </div>
       </div>
     </aside>
 
     <div id='content'
-        class='flex flex-col overflow-auto h-full bg-white p-4 mr-8 rounded-t-3xl drop-shadow-3xl'
-        style='grid-column: 2 / 3; grid-row: 2 / 3;'>
-        {% block content %}
-        {% endblock %}
+      class='flex flex-col overflow-auto h-full bg-white p-4 mr-8 rounded-t-3xl drop-shadow-3xl'
+      style='grid-column: 2 / 3; grid-row: 2 / 3;'>
+      {% block content %}
+      {% endblock %}
     </div>
   </body>
 </html>
