@@ -42,7 +42,6 @@ def access_denied(_):
 
 @login_required
 def view_image(request, image_url):
-    print(image_url[1:])
     context = {
         'image_url': image_url[1:],
     }

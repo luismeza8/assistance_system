@@ -4,7 +4,6 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 from datetime import timedelta
 
 
-# Create your models here.
 class MiembroManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -30,10 +29,9 @@ class Subsistema(models.Model):
     nombre = models.CharField(max_length=100)
     lider = models.ForeignKey('Miembro', on_delete=models.CASCADE, related_name='lider', null=True, blank=True)
 
-    def __str__(self):
-        return self.nombre
 
-#categorias
+    def __str__(self):
+        return str(self.nombre)
 
 
 class Mision(models.Model):
@@ -43,7 +41,7 @@ class Mision(models.Model):
     fecha_finalizacion = models.DateField()
 
     def __str__(self):
-        return self.nombre
+        return str(self.nombre)
 
 
 class Miembro(AbstractBaseUser, PermissionsMixin):
@@ -69,6 +67,7 @@ class Miembro(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
 
+
     def __str__(self):
         return f'{self.first_names} {self.last_names}'
 
@@ -78,8 +77,8 @@ class Miembro(AbstractBaseUser, PermissionsMixin):
 
 
     def get_name(self):
-        first_name = self.first_names.split()[0]
-        last_name = self.last_names.split()[0]
+        first_name = str(self.first_names).split()[0]
+        last_name = str(self.last_names).split()[0]
         return f'{first_name} {last_name}'
 
 
@@ -126,13 +125,13 @@ class Miembro(AbstractBaseUser, PermissionsMixin):
     def get_hours_worked_this_week(self):
         seconds = self.seconds_worked_this_week()
         hours = int(seconds // 3600)
-        return f'0{hours}' if len(str(hours)) == 1 else hours
+        return f'0{hours}' if len(str(hours)) == 1 else str(hours)
 
 
     def get_minutes_worked_this_week(self):
         seconds = self.seconds_worked_this_week()
         minutes = int((seconds / 3600) % 1 * 60)
-        return f'0{minutes}' if len(str(minutes)) == 1 else minutes
+        return f'0{minutes}' if len(str(minutes)) == 1 else str(minutes)
 
 
     def get_time_worked_this_week(self):
