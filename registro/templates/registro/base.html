@@ -17,9 +17,18 @@
     <header class='px-8 flex justify-between items-center bg-secondary text-primary' style='grid-column: 2 / 3; grid-row: 1 / 2'>
       <h1 class='font-extrabold text-2xl'>Aplicación de Gestión</h1>
       <div class='flex items-center'>
-        <h3 class='px-2 text-md'>{{ user.get_name }}</h3>
+        <div class='px-2 flex flex-col items-end'>
+          <p class='font-semibold text-md'>{{ user.get_name }}</p>
+          <a class='text-xs cursor-pointer hover:underline'
+            hx-get={% url 'change_password' %}
+            hx-target='body'
+            hx-swap='beforeend'>
+            Cambiar contraseña
+          </a>
+        </div>
         {% if user.profile_picture %}
-          <div class='h-[50px] w-[50px] bg-cover bg-center rounded-full shadow-2xl' style='background-image: url({{ user.profile_picture.url }});'></div>
+          <div class='h-[50px] w-[50px] bg-cover bg-center rounded-full shadow-2xl' 
+          style='background-image: url({{ user.profile_picture.url }});'></div>
         {% endif %}
       </div>
     </header>
@@ -52,10 +61,6 @@
         </div>
 
         <div>
-          <a class='mb-4 flex items-center text-xl hover:font-semibold cursor-pointer'>
-            <div class='mr-2 material-icons'>password</div>
-            <div class='text-base'>Asignar contraseña</div>
-          </a>
           <a href={% url 'logout' %} class='mb-4 flex items-center text-xl hover:font-bold cursor-pointer'>
             <div class='mr-2 material-icons'>logout</div>
             <div class='text-base'>Cerrar sesión</div>

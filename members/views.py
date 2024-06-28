@@ -1,9 +1,10 @@
+from django.contrib.auth.views import PasswordChangeView
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 import secrets
 
 from .decorators import *
@@ -33,6 +34,11 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+
+class ChangePasswordView(PasswordChangeView):
+    success_url = reverse_lazy('miembros')
+    template_name = 'members/change_password.html'
 
 
 @login_required

@@ -11,8 +11,6 @@
     style='background-color: rgba(0, 0, 0, 0.4); left: 0; top: 0;'>
     <div
         class='py-8 px-12 flex flex-col items-center bg-white max-h-[90%] overflow-y-auto min-w-[40%] w-fit h-fit rounded-xl' >
-      <!-- style='margin-top: 15vh;' -->
-      
       <h1 class='mb-4 text-2xl'>
         {% if form.instance.email != '' %}
           Editar información de {{ form.instance.get_name }}: 
@@ -53,6 +51,7 @@
 
         <label class='block'>Rol: </label>
         {{ form.role }}
+
         <div class='flex justify-end'>
           <button 
             class='mr-1 px-4 py-2 bg-secondary text-primary rounded-xl hover:shadow-xl'

@@ -73,13 +73,13 @@ class Miembro(AbstractBaseUser, PermissionsMixin):
 
 
     def get_full_name(self):
-        return f'{self.first_names} {self.last_names}'
+        return f'{self.first_names} {self.last_names}'.title()
 
 
     def get_name(self):
         first_name = str(self.first_names).split()[0]
         last_name = str(self.last_names).split()[0]
-        return f'{first_name} {last_name}'
+        return f'{first_name} {last_name}'.title()
 
 
     def is_leader(self):
