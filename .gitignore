@@ -7,3 +7,4 @@ __pycache__/
 **/__pycache__/
 media/users_profile_picture/*
 !media/users_profile_picture/default_profile_picture.jpg
+fallos.txt

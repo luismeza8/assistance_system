@@ -10,6 +10,8 @@
 
 {% block content %}
 
+<div id='modal-place'></div>
+
 <div class='above-table'>
   <h3>Total de miembros: {{ miembros.count }}</h3>
   {% if user.is_admin %}
@@ -32,8 +34,6 @@
     {% endfor %}
   {% endif %}
 </div>
-
-<div id='modal-place'></div>
 
 <table class='custom-table'>
   <thead>
@@ -62,13 +62,13 @@
               {% endif %}
               {% if user.pk == miembro.pk or user.is_admin %}
                 <a class='cursor-pointer hover:underline'
-                hx-get='{% url 'registros' miembro.pk %}'
-                hx-target='#content'
-                hx-push-url='true'>
+                  hx-get='{% url 'registros' miembro.pk %}'
+                  hx-target='#content'
+                  hx-push-url='true'>
               {% endif %}
+                </a>
                 <div class='flex flex-col justify-center items-start'>
                   <div class='font-semibold'>{{ miembro.get_full_name }}</div>
-                </a>
                   <div class='block text-xs'>{{ miembro.email }}</div>
                   <div class='block text-xs'>{{ miembro.phone_number }}</div>
                 </div>

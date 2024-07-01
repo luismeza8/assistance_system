@@ -58,6 +58,8 @@ def view_image(request, image_url):
 def miembros(request):
     miembros = Miembro.objects.all()
     template = 'registro/miembros/miembros.html' if request.htmx else 'registro/miembros/miembros_full.html'
+    if request.htmx:
+        print('yeap')
     
     return render(request, template, {'miembros': miembros})
 
@@ -77,6 +79,7 @@ def agregar_miembro(request):
             return redirect('miembros')
         else:
             print(form.errors.as_data())
+            return render(request, 'registro/miembros/formulario_miembro_modal.html', {'form': form, 'url': '/agregar_miembro', 'errores': 'asdf'})
     else:
         form = MiembroForm()
     return render(request, 'registro/miembros/formulario_miembro_modal.html', {'form': form, 'url': '/agregar_miembro'})

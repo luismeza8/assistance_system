@@ -19,10 +19,10 @@
       <div class='flex items-center'>
         <div class='px-2 flex flex-col items-end'>
           <p class='font-semibold text-md'>{{ user.get_name }}</p>
-          <a class='text-xs cursor-pointer hover:underline'
+          <a 
+            class='text-xs cursor-pointer hover:underline'
             hx-get={% url 'change_password' %}
-            hx-target='body'
-            hx-swap='beforeend'>
+            hx-target='#content'>
             Cambiar contraseña
           </a>
         </div>

@@ -18,7 +18,12 @@
           Agregar nuevo miembro
         {% endif %}
       </h1>
-      <form enctype="multipart/form-data" action={{ url }} class='w-full' method='POST'>
+
+        {% if errores %}
+          {{ errores }}
+        {% endif %}
+
+      <form enctype="multipart/form-data" hx-post='{{ url }}' hx-target='#modal-place' hx-swap='innerHTML' class='w-full' method='POST'>
         {% csrf_token %}
         <div class='flex justify-between'>
           <div class='mr-2 flex flex-col w-full'>
