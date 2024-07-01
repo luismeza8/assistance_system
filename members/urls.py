@@ -11,6 +11,8 @@ urlpatterns = [
 
     path('access_denied', views.access_denied, name='access_denied'),
 
+    path('email_validation', views.email_validation, name='email_validation'),
+
     path('miembros', views.miembros, name='miembros'),
     path('agregar_miembro', views.agregar_miembro, name='agregar_miembro'),
     path('editar_miembro/<int:primary_key>', views.editar_miembro, name='editar_miembro'),

@@ -1,6 +1,5 @@
-from django.forms.widgets import DateInput
-
 from django import forms
+from django.urls import reverse_lazy
 from .models import *
 
 
@@ -18,7 +17,16 @@ class MiembroForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'class': 'text-field'})    
     )
     email = forms.EmailField(
-        widget=forms.EmailInput(attrs={'class': 'text-field'})
+        widget=forms.EmailInput(
+            attrs={
+                'class': 'text-field',
+                'hx-post': reverse_lazy('email_validation'),
+                'hx-target': '#email-error',
+                'hx-select': '#email-error',
+                'hx-select-oob': '#btn-submit',
+                'hx-trigger': 'keyup[target.value.length > 3]',
+            }
+        )
     )
     mision = forms.ModelMultipleChoiceField(
         label='Mision/es',
@@ -32,12 +40,6 @@ class MiembroForm(forms.ModelForm):
         widget=forms.CheckboxSelectMultiple(attrs={'class': 'checkbox_list'}),
         required=False,
     )
-    # role = forms.ModelChoiceField(
-    #     label='rol',
-    #     queryset=list(Miembro.ROLES.values())
-    # )
-    #
-    # role.widget.attrs.update({'class': 'select'})
 
     class Meta:
         model = Miembro

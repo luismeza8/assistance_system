@@ -54,6 +54,32 @@ def view_image(request, image_url):
     return render(request, 'components/view_image.html', context)
 
 
+def email_validation(request):
+    valid_email = HttpResponse(
+        '''
+        <button class='bg-primary text-secondary px-4 ml-4 rounded-xl hover:shadow-xl' id="btn-submit">Aceptar</button>"
+        '''
+    )
+    invalid_email = HttpResponse(
+        '''
+        <p id="email-error">Ya existe un miembro con este correo.</p>
+        <button class='bg-grey-800 text-secondary px-4 ml-4 rounded-xl hover:shadow-xl' id="btn-submit" disabled>Aceptar</button>"
+        '''
+    )
+    
+    if 'member-id' in request.POST:
+        member = Miembro.objects.get(pk=request.POST['member-id'])
+        print(f'request {request.POST["email"]}')
+        print(f'member {member.email}')
+        if request.POST['email'] == member.email:
+            return valid_email
+
+    if Miembro.objects.filter(email=request.POST['email']).exists():
+        return invalid_email
+
+    return valid_email
+
+
 @login_required
 def miembros(request):
     miembros = Miembro.objects.all()

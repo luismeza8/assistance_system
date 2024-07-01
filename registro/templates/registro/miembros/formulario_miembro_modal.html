@@ -25,6 +25,12 @@
 
       <form enctype="multipart/form-data" hx-post='{{ url }}' hx-target='#modal-place' hx-swap='innerHTML' class='w-full' method='POST'>
         {% csrf_token %}
+
+        {% if url != '/agregar_miembro' %}
+          <label class='hidden' for="member-id"></label>
+          <input class='hidden' name='member-id' type="text" value='{{ form.instance.pk }}'>
+        {% endif %}
+
         <div class='flex justify-between'>
           <div class='mr-2 flex flex-col w-full'>
             <label class='block'for="">Nombre: </label>
@@ -35,7 +41,9 @@
             {{ form.last_names }}
           </div>
         </div>
+
         <label class='block' for="">Email:</label>
+        <p class='text-primary font-bold' id="email-error"></p>
         {{ form.email }}
 
         <label class='block' for="">Teléfono:</label>
@@ -63,7 +71,7 @@
             type='button' onclick='deleteModal()'>
             Cancelar
           </button>
-          <button type="submit"
+          <button id='btn-submit' type="submit"
             class='bg-primary text-secondary px-4 ml-4 rounded-xl hover:shadow-xl'>
             Aceptar
           </button>
