@@ -53,63 +53,25 @@ def change_password(request):
     return render(request, 'members/change_password.html')
 
 
-def is_old_password_validate(request):
+def validate_passwords(request):
+    response = ''
+
     old_password = request.POST.get('old_password', False)
-    return request.user.check_password(old_password)
+    new_password_1 = request.POST.get('new_password_1', False)
+    new_password_2 = request.POST.get('new_password_2', False)
 
+    disabled_button = "<button disabled id='btn-submit' class='bg-gray-600 text-secondary px-4 ml-2 rounded-xl hover:shadow-xl'>Cambiar</button>"
 
-def old_password_validation(request):
-    if is_old_password_validate(request):
-        return HttpResponse(
-            '''
-              <button 
-                id='btn-submit'
-                type='submit'
-                class='bg-primary text-secondary px-4 ml-2 rounded-xl hover:shadow-xl'
-              >Cambiar</button>
-            '''
-        )
-    return HttpResponse(
-        '''
-        <p>Contraseña incorrecta</p>
-          <button 
-            id='btn-submit'
-            type='submit'
-            class='bg-gray-600 text-secondary px-4 ml-2 rounded-xl hover:shadow-xl'
-            disabled
-          >Cambiar</button>
-        '''
-    )
+    if not request.user.check_password(old_password):
+        response += '<p id="old-password-error">La contra no es correcta</p> ' + disabled_button
 
+    if new_password_1 != new_password_2:
+        response += '<p id="new-password-error">Las contrasenas no coinciden</p> ' + disabled_button
 
-def is_new_password_validate(request):
-    new_password_1 = request.POST['new_password_1']
-    new_password_2 = request.POST['new_password_2']
-    return new_password_1 != None and len(new_password_1) > 1 and new_password_1 == new_password_2
+    if request.user.check_password(old_password) and len(new_password_1) > 1 and new_password_1 == new_password_2:
+        response += "<button id='btn-submit' type='submit' class='bg-primary text-secondary px-4 ml-2 rounded-xl hover:shadow-xl'>Cambiar</button>"
 
-
-def new_password_validation(request):
-    if is_new_password_validate(request):
-        return HttpResponse(
-            '''
-              <button 
-                id='btn-submit'
-                type='submit'
-                class='bg-primary text-secondary px-4 ml-2 rounded-xl hover:shadow-xl'
-              >Cambiar</button>
-            '''
-        )
-    return HttpResponse(
-        '''
-        <p>Contraseña incorrecta</p>
-          <button 
-            id='btn-submit'
-            type='submit'
-            class='bg-gray-600 text-secondary px-4 ml-2 rounded-xl hover:shadow-xl'
-            disabled
-          >Cambiar</button>
-        '''
-    )
+    return HttpResponse(response)
 
 
 @login_required
