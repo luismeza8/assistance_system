@@ -12,8 +12,6 @@ urlpatterns = [
     path('access_denied', views.access_denied, name='access_denied'),
 
     path('email_validation', views.email_validation, name='email_validation'),
-    path('old_password_validation', views.old_password_validation, name='old_password_validation'),
-    path('new_password_validation', views.new_password_validation, name='new_password_validation'),
     path('validate_passwords', views.validate_passwords, name='validate_passwords'),
 
     path('miembros', views.miembros, name='miembros'),
