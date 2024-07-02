@@ -41,10 +41,14 @@ class ChangePasswordView(PasswordChangeView):
     template_name = 'members/change_password.html'
 
 
+@login_required
 def change_password(request):
-    if is_old_password_validate(request) and is_new_password_validate(request):
-        pass
+    if request.method == 'POST':
+        new_password = request.POST.get('new_password_1', '')
+        request.user.set_password(new_password)
+        request.user.save()
 
+        return redirect('miembros')
 
     return render(request, 'members/change_password.html')
 
@@ -64,6 +68,12 @@ def is_new_password_validate(request):
     new_password_1 = request.POST['new_password_1']
     new_password_2 = request.POST['new_password_2']
     return new_password_1 == new_password_2
+
+
+def new_password_validation(request):
+    if is_new_password_validate(request):
+        return HttpResponse('')
+    return HttpResponse('nop')
 
 
 @login_required

@@ -13,6 +13,7 @@ urlpatterns = [
 
     path('email_validation', views.email_validation, name='email_validation'),
     path('old_password_validation', views.old_password_validation, name='old_password_validation'),
+    path('new_password_validation', views.new_password_validation, name='new_password_validation'),
 
     path('miembros', views.miembros, name='miembros'),
     path('agregar_miembro', views.agregar_miembro, name='agregar_miembro'),
