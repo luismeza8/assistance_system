@@ -60,20 +60,56 @@ def is_old_password_validate(request):
 
 def old_password_validation(request):
     if is_old_password_validate(request):
-        return HttpResponse('')
-    return HttpResponse('nop')
+        return HttpResponse(
+            '''
+              <button 
+                id='btn-submit'
+                type='submit'
+                class='bg-primary text-secondary px-4 ml-2 rounded-xl hover:shadow-xl'
+              >Cambiar</button>
+            '''
+        )
+    return HttpResponse(
+        '''
+        <p>Contraseña incorrecta</p>
+          <button 
+            id='btn-submit'
+            type='submit'
+            class='bg-gray-600 text-secondary px-4 ml-2 rounded-xl hover:shadow-xl'
+            disabled
+          >Cambiar</button>
+        '''
+    )
 
 
 def is_new_password_validate(request):
     new_password_1 = request.POST['new_password_1']
     new_password_2 = request.POST['new_password_2']
-    return new_password_1 == new_password_2
+    return new_password_1 != None and len(new_password_1) > 1 and new_password_1 == new_password_2
 
 
 def new_password_validation(request):
     if is_new_password_validate(request):
-        return HttpResponse('')
-    return HttpResponse('nop')
+        return HttpResponse(
+            '''
+              <button 
+                id='btn-submit'
+                type='submit'
+                class='bg-primary text-secondary px-4 ml-2 rounded-xl hover:shadow-xl'
+              >Cambiar</button>
+            '''
+        )
+    return HttpResponse(
+        '''
+        <p>Contraseña incorrecta</p>
+          <button 
+            id='btn-submit'
+            type='submit'
+            class='bg-gray-600 text-secondary px-4 ml-2 rounded-xl hover:shadow-xl'
+            disabled
+          >Cambiar</button>
+        '''
+    )
 
 
 @login_required
