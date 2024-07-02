@@ -7,11 +7,12 @@ from . import views
 urlpatterns = [
     path('login', views.login_view, name='login'),
     path('logout', views.logout_view, name='logout'),
-    path('change_password', views.ChangePasswordView.as_view(), name='change_password'),
+    path('change_password', views.change_password, name='change_password'),
 
     path('access_denied', views.access_denied, name='access_denied'),
 
     path('email_validation', views.email_validation, name='email_validation'),
+    path('old_password_validation', views.old_password_validation, name='old_password_validation'),
 
     path('miembros', views.miembros, name='miembros'),
     path('agregar_miembro', views.agregar_miembro, name='agregar_miembro'),

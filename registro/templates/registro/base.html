@@ -21,8 +21,8 @@
           <p class='font-semibold text-md'>{{ user.get_name }}</p>
           <a 
             class='text-xs cursor-pointer hover:underline'
-            hx-get={% url 'change_password' %}
-            hx-target='#content'>
+            hx-get='{% url 'change_password' %}'
+            hx-target='#modal-place'>
             Cambiar contraseña
           </a>
         </div>

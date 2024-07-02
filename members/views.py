@@ -41,6 +41,31 @@ class ChangePasswordView(PasswordChangeView):
     template_name = 'members/change_password.html'
 
 
+def change_password(request):
+    if is_old_password_validate(request) and is_new_password_validate(request):
+        pass
+
+
+    return render(request, 'members/change_password.html')
+
+
+def is_old_password_validate(request):
+    old_password = request.POST.get('old_password', False)
+    return request.user.check_password(old_password)
+
+
+def old_password_validation(request):
+    if is_old_password_validate(request):
+        return HttpResponse('')
+    return HttpResponse('nop')
+
+
+def is_new_password_validate(request):
+    new_password_1 = request.POST['new_password_1']
+    new_password_2 = request.POST['new_password_2']
+    return new_password_1 == new_password_2
+
+
 @login_required
 def access_denied(_):
     return HttpResponse('nop')
