@@ -3,8 +3,8 @@ node_modules/
 *.log
 *.pot
 *.pyc
-__pycache__/
-**/__pycache__/
+pycache/
+**/pycache/
 media/users_profile_picture/*
 !media/users_profile_picture/default_profile_picture.jpg
 fallos.md
