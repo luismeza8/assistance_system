@@ -99,11 +99,11 @@ class Miembro(AbstractBaseUser, PermissionsMixin):
 
 
     def seconds_worked_this_week(self):
-        from registro.models import Registro
+        from registro.models import Register
         hoy = timezone.now().date()
         inicio_semana = hoy - timedelta(days=hoy.weekday())
         fin_semana = inicio_semana + timedelta(days=6)
-        registros_semana_actual = Registro.objects.filter(miembro=self).filter(fecha__range=[inicio_semana, fin_semana])
+        registros_semana_actual = Register.objects.filter(member=self).filter(date__range=[inicio_semana, fin_semana])
 
         if len(registros_semana_actual) < 2:
             return 0
@@ -112,10 +112,10 @@ class Miembro(AbstractBaseUser, PermissionsMixin):
 
         for i, registro in enumerate(registros_semana_actual):
             if len(registros_semana_actual) > i+1:
-                if registro.tipo == 'E' and registros_semana_actual[i+1].tipo == 'S':
+                #if registro.tipo == 'E' and registros_semana_actual[i+1].tipo == 'S':
                     entrada = registro
                     salida = registros_semana_actual[i+1]
-                    diferencia = salida.fecha - entrada.fecha
+                    diferencia = salida.date - entrada.date
                     diferencia_en_segundos = diferencia.total_seconds()
                     segundos_trabajados += diferencia_en_segundos
 

@@ -6,7 +6,7 @@ from members.models import Miembro
 
 @login_required
 def registros(request, primary_key):
-    registros = Registro.objects.filter(miembro=primary_key).order_by('-fecha')
+    registros = Register.objects.filter(member=primary_key).order_by('-date')
     miembro = Miembro.objects.get(pk=primary_key)
 
     if request.htmx:

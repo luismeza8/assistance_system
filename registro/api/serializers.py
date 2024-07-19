@@ -23,8 +23,8 @@ class MiembroSerializer(serializers.ModelSerializer):
 
 
 class RegistroSerializer(serializers.ModelSerializer):
-    miembro = serializers.PrimaryKeyRelatedField(queryset=Miembro.objects.all())
+    member = serializers.PrimaryKeyRelatedField(queryset=Miembro.objects.all())
 
     class Meta:
-        model = Registro
+        model = Register
         fields = ('__all__')

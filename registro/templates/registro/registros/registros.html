@@ -16,7 +16,6 @@
   <table style='display: table !important;' class='custom-table'>
     <thead>
       <tr>
-        <th>Tipo</th>
         <th>Fecha</th>
         <th>Hora</th>
       </tr>
@@ -24,13 +23,8 @@
     <tbody>
       {% for registro in registros %}
         <tr>
-          {% if registro.tipo == 'E' %}
-            <td>Entrada</td>
-          {% elif registro.tipo == 'S' %}
-            <td>Salida</td>
-          {% endif %}
           <td>{{ registro.get_full_date }}</td>
-          <td>{{ registro.fecha.time }}</td>
+          <td>{{ registro.date }}</td>
         </tr>
       {% endfor %}
     </tbody>
