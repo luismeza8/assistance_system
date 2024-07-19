@@ -17,14 +17,22 @@
     <thead>
       <tr>
         <th>Fecha</th>
-        <th>Hora</th>
+        <th>Hora entrada</th>
+        <th>Hora salida</th>
+        <th>Horas trabajadas</th>
       </tr>
     </thead>
     <tbody>
       {% for registro in registros %}
         <tr>
           <td>{{ registro.get_full_date }}</td>
-          <td>{{ registro.date }}</td>
+          <td>{{ registro.check_in_time }}</td>
+          {% if not registro.check_out_time %}
+            <td>--:--</td>
+          {% else %}
+            <td>{{ registro.check_out_time }}</td>
+          {% endif %}
+          <td>{{ registro.hours_worked }}</td>
         </tr>
       {% endfor %}
     </tbody>
