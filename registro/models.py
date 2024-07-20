@@ -11,6 +11,15 @@ class Register(models.Model):
     check_out_time = models.TimeField(null=True)
 
 
+    def save(self, *args, **kwargs):
+        if self.check_in_time == None:
+            self.check_in_time = timezone.now().time()
+        else:
+            self.check_out_time = timezone.now().time()
+
+        super(Register, self).save(*args, **kwargs)
+
+
     def _get_minutes_to_seconds(self, minutes):
         return minutes * 60
     
@@ -26,6 +35,17 @@ class Register(models.Model):
             check_out_seconds = self.check_out_time.hour * 3600 + self.check_out_time.minute * 60 + self.check_out_time.second
 
             result = check_out_seconds - check_in_seconds
+            hours = result / 3600
+            return hours
+
+
+    @property
+    def time_worked(self):
+        if self.check_in_time and self.check_out_time:
+            check_in_seconds = self.check_in_time.hour * 3600 + self.check_in_time.minute * 60 + self.check_in_time.second
+            check_out_seconds = self.check_out_time.hour * 3600 + self.check_out_time.minute * 60 + self.check_out_time.second
+
+            result = check_out_seconds - check_in_seconds
 
             hours = result / 3600
             minutes = (hours % 1) * 60
@@ -35,15 +55,6 @@ class Register(models.Model):
 
             return f'{hours}:{minutes}'
         return '--.--'
-
-
-    def save(self, *args, **kwargs):
-        if self.check_in_time == None:
-            self.check_in_time = timezone.now().time()
-        else:
-            self.check_out_time = timezone.now().time()
-
-        super(Register, self).save(*args, **kwargs)
 
 
     def __str__(self):
