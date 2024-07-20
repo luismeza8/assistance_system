@@ -1,0 +1,1 @@
+const registerChart = new Chart()

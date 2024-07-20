@@ -2,12 +2,17 @@
 
 {% block head %}
   <title>{{ miembro.get_name }}</title>
+  <script src='{% static 'js/libraries/chart.umd.min.js' %}' defer></script>
+  <script src='{% static 'js/register/register.js' %}' defer></script>
 {% endblock %}
 
 {% block content %}
 <body>
   <div class='flex justify-start'>
-<h1 class='px-4 mb-2 text-2xl font-bold'>Registros de {{ miembro.get_name }}</h1>
+    <h1 class='px-4 mb-2 text-2xl font-bold'>Registros de {{ miembro.get_name }}</h1>
+  </div>
+  <div class='w-full'>
+    <canvas id='register_chart'></canvas>
   </div>
   <div class='above-table'>
     <h3>Total de registros: {{ registros.count }}</h3>

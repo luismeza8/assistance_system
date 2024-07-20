@@ -36,7 +36,7 @@ class Register(models.Model):
 
             result = check_out_seconds - check_in_seconds
             hours = result / 3600
-            return hours
+            return round(hours, 2)
 
 
     @property
