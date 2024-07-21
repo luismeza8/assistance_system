@@ -2,7 +2,6 @@
 
 {% block head %}
   <title>{{ miembro.get_name }}</title>
-
 {% endblock %}
 
 {% block content %}
@@ -42,32 +41,7 @@
       {% endfor %}
     </tbody>
   </table> 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-  (() => {
-    const ctx = document.getElementById('register_chart');
-    const value = JSON.parse(document.getElementById('hours').textContent);
-
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'],
-        datasets: [{
-          label: 'Horas trabajadas cada dia',
-          backgroundColor: '#1e1d4f',
-          data: value,
-        }]
-      },
-      options: {
-        aspectRatio: 5,
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-  })();
-  </script>
+  <script type='text/javascript' src='{% static "js/libraries/chart.umd.min.js" %}' defer></script>
+  <script type='text/javascript' src='{% static "js/register/register.js" %}' defer></script>
 </body>
 {% endblock %}
