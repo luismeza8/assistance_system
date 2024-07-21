@@ -15,7 +15,7 @@
     <canvas id='register_chart'></canvas>
   </div>
   <div class='above-table'>
-    <h3>Total de registros: {{ registros.count }}</h3>
+    <h3>Total de registros: {{ registros|length }}</h3>
     <h3>Horas trabajadas: {{ miembro.get_time_worked_this_week }}</h3>
   </div>
   <table style='display: table !important;' class='custom-table'>
@@ -24,7 +24,7 @@
         <th>Fecha</th>
         <th>Hora entrada</th>
         <th>Hora salida</th>
-        <th>Horas trabajadas</th>
+        <th>Tiempo trabajado</th>
       </tr>
     </thead>
     <tbody>
@@ -42,35 +42,32 @@
       {% endfor %}
     </tbody>
   </table> 
-  <script src='{% static 'js/libraries/chart.umd.min.js' %}' defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    (() => {
-  const ctx = document.getElementById('register_chart');
-  const value = JSON.parse(document.getElementById('hours').textContent);
+  (() => {
+    const ctx = document.getElementById('register_chart');
+    const value = JSON.parse(document.getElementById('hours').textContent);
 
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'],
-      datasets: [{
-        label: '# of Votes',
-        data: value,
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'],
+        datasets: [{
+          label: 'Horas trabajadas cada dia',
+          backgroundColor: '#1e1d4f',
+          data: value,
+        }]
+      },
+      options: {
+        aspectRatio: 5,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
         }
       }
-    }
-  });
-
-    console.log(value);
-
-    })();
-    
+    });
+  })();
   </script>
 </body>
 {% endblock %}
