@@ -23,7 +23,11 @@
           {{ errores }}
         {% endif %}
 
-      <form enctype="multipart/form-data" hx-post='{{ url }}' hx-target='#modal-place' hx-swap='innerHTML' class='w-full' method='POST'>
+      <form class='w-full'
+        enctype="multipart/form-data" method='POST'
+        hx-post='{{ url }}'
+        hx-target='#content'
+        hx-swap='innerHTML'>
         {% csrf_token %}
 
         {% if url != '/agregar_miembro' %}
