@@ -71,8 +71,8 @@ def validate_passwords(request):
 
 
 @login_required
-def access_denied(_):
-    return HttpResponse('nop')
+def access_denied(request):
+    return render(request, 'members/login/access_denied.html')
 
 
 @login_required
@@ -112,7 +112,7 @@ def email_validation(request):
 @login_required
 def miembros(request):
     miembros = Miembro.objects.all()
-    template = 'miembers/miembros/miembros.html' if request.htmx else 'members/miembros/miembros_full.html'
+    template = 'members/miembros/miembros.html' if request.htmx else 'members/miembros/miembros_full.html'
     if request.htmx:
         print('yeap')
     
