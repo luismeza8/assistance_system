@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_htmx',
     'registro',
     'members',
+    'divisions',
 ]
 
 MIDDLEWARE = [

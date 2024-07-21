@@ -25,25 +25,6 @@ class MiembroManager(BaseUserManager):
         return user
 
 
-class Subsistema(models.Model):
-    nombre = models.CharField(max_length=100)
-    lider = models.ForeignKey('Miembro', on_delete=models.CASCADE, related_name='lider', null=True, blank=True)
-
-
-    def __str__(self):
-        return str(self.nombre)
-
-
-class Mision(models.Model):
-    nombre = models.CharField(max_length=100)
-    lider = models.ForeignKey('Miembro', on_delete=models.CASCADE, related_name='lider_de', null=True, blank=True)
-    fecha_inicio = models.DateField()
-    fecha_finalizacion = models.DateField()
-
-    def __str__(self):
-        return str(self.nombre)
-
-
 class Miembro(AbstractBaseUser, PermissionsMixin):
     ROLES = {
         'M': 'MEMBER',
@@ -55,8 +36,8 @@ class Miembro(AbstractBaseUser, PermissionsMixin):
     last_names = models.CharField(max_length=100, default='')
     phone_number = models.CharField(max_length=12, default='')
     email = models.EmailField(max_length=255, unique=True)
-    mision = models.ManyToManyField(Mision)
-    subsistema = models.ManyToManyField(Subsistema)
+    mision = models.ManyToManyField('divisions.Mision')
+    subsistema = models.ManyToManyField('divisions.Subsistema')
     hours_per_week = models.IntegerField(default=0)
     is_admin = models.BooleanField(default=False)
     role = models.CharField(max_length=1, choices=ROLES, default='M')
@@ -82,14 +63,17 @@ class Miembro(AbstractBaseUser, PermissionsMixin):
         return f'{first_name} {last_name}'.title()
 
 
+    @property
     def is_leader(self):
         return self.role == 'L'
 
 
+    @property
     def is_admin(self):
         return self.role == 'A'
 
 
+    @property
     def is_member(self):
         return self.role == 'M'
 

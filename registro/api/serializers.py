@@ -2,6 +2,8 @@ from rest_framework import serializers
 from members.models import *
 from registro.models import *
 
+from divisions.models import *
+
 class MisionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mision

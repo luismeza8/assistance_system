@@ -34,11 +34,7 @@ def registros(request, primary_key, number_week=None):
             hours_worked_in_week[6] += register.hours_worked
 
     miembro = Miembro.objects.get(pk=primary_key)
-
-    if request.htmx:
-        template = 'registro/registros/registros.html'
-    else:
-        template = 'registro/registros/registros_full.html'
+    template = 'registro/registros/registros.html' if request.htmx else 'registro/registros/registros_full.html'
 
     context = {
         'registros': register_in_week,

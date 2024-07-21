@@ -2,6 +2,8 @@ from django import forms
 from django.urls import reverse_lazy
 from .models import *
 
+from divisions.models import *
+
 
 class MiembroForm(forms.ModelForm):
     first_names = forms.CharField(
