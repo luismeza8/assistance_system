@@ -36,7 +36,7 @@
     {% for mision in misiones %}
     <tr>
       <td>{{ mision.nombre }}</td>
-      <td>{{ mision.lider.nombre }}</td>
+      <td>{{ mision.lider.get_name }}</td>
       <td>{{ mision.miembro_set.count }}</td>
       <td>{{ mision.fecha_inicio }}</td>
       <td>{{ mision.fecha_finalizacion }}</td>

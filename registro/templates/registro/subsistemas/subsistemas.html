@@ -32,7 +32,7 @@
     {% for subsistema in subsistemas %}
     <tr>
       <td>{{ subsistema.nombre }}</td>
-      <td>{{ subsistema.lider.nombre }}</td>
+      <td>{{ subsistema.lider.get_name }}</td>
       <td>{{ subsistema.miembro_set.count }}</td>
       {% if user.is_admin %}
         <td class='flex flex-row items-center justify-center'>
