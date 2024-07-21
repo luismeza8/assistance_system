@@ -27,7 +27,7 @@ def login_view(request):
             messages.warning(request, 'Error al iniciar sesión.')
             return redirect('login')
 
-    return render(request, 'members/login.html')
+    return render(request, 'members/login/login.html')
 
 
 @login_required
@@ -35,10 +35,6 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
-
-class ChangePasswordView(PasswordChangeView):
-    success_url = reverse_lazy('miembros')
-    template_name = 'members/change_password.html'
 
 
 @login_required
@@ -50,7 +46,7 @@ def change_password(request):
 
         return redirect('miembros')
 
-    return render(request, 'members/change_password.html')
+    return render(request, 'members/login/change_password.html')
 
 
 def validate_passwords(request):
@@ -116,7 +112,7 @@ def email_validation(request):
 @login_required
 def miembros(request):
     miembros = Miembro.objects.all()
-    template = 'registro/miembros/miembros.html' if request.htmx else 'registro/miembros/miembros_full.html'
+    template = 'miembers/miembros/miembros.html' if request.htmx else 'members/miembros/miembros_full.html'
     if request.htmx:
         print('yeap')
     
@@ -141,7 +137,7 @@ def agregar_miembro(request):
             return render(request, 'registro/miembros/formulario_miembro_modal.html', {'form': form, 'url': '/agregar_miembro', 'errores': 'asdf'})
     else:
         form = MiembroForm()
-    return render(request, 'registro/miembros/formulario_miembro_modal.html', {'form': form, 'url': '/agregar_miembro'})
+    return render(request, 'members/miembros/formulario_miembro_modal.html', {'form': form, 'url': '/agregar_miembro'})
 
 
 @login_required
@@ -158,7 +154,7 @@ def editar_miembro(request, primary_key):
         else:
             print(form.errors.as_data())
 
-    return render(request, 'registro/miembros/formulario_miembro_modal.html', {'form': form, 'url': f'/editar_miembro/{miembro.pk}'})
+    return render(request, 'members/miembros/formulario_miembro_modal.html', {'form': form, 'url': f'/editar_miembro/{miembro.pk}'})
 
 
 @login_required

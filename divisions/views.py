@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 
 from members.decorators import *
 
@@ -10,7 +10,7 @@ from .forms import *
 @login_required
 def misiones(request):
     misiones = Mision.objects.all()
-    template = 'registro/misiones/misiones.html' if request.htmx else 'registro/misiones/misiones_full.html'
+    template = 'divisions/misiones/misiones.html' if request.htmx else 'divisions/misiones/misiones_full.html'
 
     return render(request, template, {'misiones': misiones})
 
@@ -25,7 +25,7 @@ def agregar_mision(request):
             return redirect('misiones')
     else:
         form = MisionForm()
-    return render(request, 'registro/misiones/formulario_mision_modal.html', {'form': form, 'url': f'agregar_mision'})
+    return render(request, 'divisions/misiones/formulario_mision_modal.html', {'form': form, 'url': f'agregar_mision'})
 
 
 @login_required
@@ -40,7 +40,7 @@ def editar_mision(request, primary_key):
             form.save()
             return redirect('misiones')
     
-    return render(request, 'registro/misiones/formulario_mision_modal.html', {'form': form, 'url': f'editar_mision/{primary_key}'})
+    return render(request, 'divisions/misiones/formulario_mision_modal.html', {'form': form, 'url': f'editar_mision/{primary_key}'})
 
 
 @login_required
@@ -66,7 +66,7 @@ def eliminar_mision(request, primary_key):
 @login_required
 def subsistemas(request):
     subsistemas = Subsistema.objects.all()
-    template = 'registro/subsistemas/subsistemas.html' if request.htmx else 'registro/subsistemas/subsistemas_full.html'
+    template = 'divisions/subsistemas/subsistemas.html' if request.htmx else 'divisions/subsistemas/subsistemas_full.html'
 
     return render(request, template, {'subsistemas': subsistemas})
 
@@ -81,7 +81,7 @@ def agregar_subsistema(request):
             return redirect('subsistemas')
     else:
         form = SubsistemaForm()
-        return render(request, 'registro/subsistemas/formulario_subsistema_modal.html', {'form': form, 'url': '/agregar_subsistema'})
+        return render(request, 'divisions/subsistemas/formulario_subsistema_modal.html', {'form': form, 'url': '/agregar_subsistema'})
 
 
 @login_required
@@ -96,7 +96,7 @@ def editar_subsistema(request, primary_key):
             form.save()
             return redirect('subsistemas')
 
-    return render(request, 'registro/subsistemas/formulario_subsistema_modal.html', {'form': form, 'url': f'/editar_subsistema/{primary_key}'})
+    return render(request, 'divisions/subsistemas/formulario_subsistema_modal.html', {'form': form, 'url': f'/editar_subsistema/{primary_key}'})
 
 
 @login_required
