@@ -15,31 +15,23 @@ def registros(request, primary_key, number_week=None):
         if register.date.isocalendar().week == week:
             register_in_week.append(register)
 
-    hours_worked_in_week = {
-        'lunes': 0,
-        'martes': 0,
-        'miercoles': 0,
-        'jueves': 0,
-        'viernes': 0,
-        'sabado': 0,
-        'domingo': 0
-    }
+    hours_worked_in_week = [0, 0, 0, 0, 0, 0, 0]
 
     for register in register_in_week:
         if register.date.weekday() == 0:
-            hours_worked_in_week['lunes'] += round(register.hours_worked)
+            hours_worked_in_week[0] += register.hours_worked
         elif register.date.weekday() == 1:
-            hours_worked_in_week['martes'] += round(register.hours_worked)
+            hours_worked_in_week[1] += register.hours_worked
         elif register.date.weekday() == 2:
-            hours_worked_in_week['miercoles'] += round(register.hours_worked)
+            hours_worked_in_week[2] += register.hours_worked
         elif register.date.weekday() == 3:
-            hours_worked_in_week['jueves'] += round(register.hours_worked)
+            hours_worked_in_week[3] += register.hours_worked
         elif register.date.weekday() == 4:
-            hours_worked_in_week['viernes'] += round(register.hours_worked)
+            hours_worked_in_week[4] += register.hours_worked
         elif register.date.weekday() == 5:
-            hours_worked_in_week['sabado'] += round(register.hours_worked)
+            hours_worked_in_week[5] += register.hours_worked
         elif register.date.weekday() == 6:
-            hours_worked_in_week['domingo'] += round(register.hours_worked)
+            hours_worked_in_week[6] += register.hours_worked
 
     miembro = Miembro.objects.get(pk=primary_key)
 

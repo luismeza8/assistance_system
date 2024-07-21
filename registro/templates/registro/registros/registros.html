@@ -2,16 +2,16 @@
 
 {% block head %}
   <title>{{ miembro.get_name }}</title>
-  <script src='{% static 'js/libraries/chart.umd.min.js' %}' defer></script>
-  <script src='{% static 'js/register/register.js' %}' defer></script>
+
 {% endblock %}
 
 {% block content %}
 <body>
+  {{ hours|json_script:'hours' }}
   <div class='flex justify-start'>
     <h1 class='px-4 mb-2 text-2xl font-bold'>Registros de {{ miembro.get_name }}</h1>
   </div>
-  <div class='w-full'>
+  <div class='flex justify-center h-[600px]'>
     <canvas id='register_chart'></canvas>
   </div>
   <div class='above-table'>
@@ -42,5 +42,35 @@
       {% endfor %}
     </tbody>
   </table> 
+  <script src='{% static 'js/libraries/chart.umd.min.js' %}' defer></script>
+  <script>
+    (() => {
+  const ctx = document.getElementById('register_chart');
+  const value = JSON.parse(document.getElementById('hours').textContent);
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'],
+      datasets: [{
+        label: '# of Votes',
+        data: value,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+    console.log(value);
+
+    })();
+    
+  </script>
 </body>
 {% endblock %}
