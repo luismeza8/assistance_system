@@ -1,15 +1,16 @@
-from django.contrib.auth.views import PasswordChangeView
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.urls import reverse, reverse_lazy
 import secrets
 
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.shortcuts import redirect, render, get_object_or_404
+from django.urls import reverse
+from django.views.generic import ListView
+
 from .decorators import *
-from .models import *
 from .forms import *
+from .models import *
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -113,9 +114,6 @@ def email_validation(request):
 def miembros(request):
     miembros = Miembro.objects.all()
     template = 'members/miembros/miembros.html' if request.htmx else 'members/miembros/miembros_full.html'
-    if request.htmx:
-        print('yeap')
-    
     return render(request, template, {'miembros': miembros})
 
 
@@ -128,7 +126,7 @@ def agregar_miembro(request):
             password = secrets.token_urlsafe(10)
             form.instance.set_password(password)
 
-            messages.success(request, f'La contraseña de {form.instance.get_name()} es: {password}')
+            messages.info(request, f'La contraseña de {form.instance.get_name()} es: {password}')
 
             form.save()
             return redirect('miembros')
@@ -143,13 +141,19 @@ def agregar_miembro(request):
 @login_required
 @admin_role_required
 def editar_miembro(request, primary_key):
-    miembro = Miembro.objects.get(pk=primary_key)
+    try:
+        miembro = Miembro.objects.get(pk=primary_key)
+    except:
+        messages.error(request, 'Miembro no encontrado')
+        return redirect('miembros')
+
     form = MiembroForm(instance=miembro)
 
     if request.method == 'POST':
         form = MiembroForm(request.POST, request.FILES, instance=miembro)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Miembro editado correctamente.')
             return redirect('miembros')
         else:
             print(form.errors.as_data())
@@ -160,10 +164,15 @@ def editar_miembro(request, primary_key):
 @login_required
 @admin_role_required
 def eliminar_miembro(request, primary_key):
-    miembro = Miembro.objects.get(pk=primary_key)
+    try:
+        miembro = Miembro.objects.get(pk=primary_key)
+    except:
+        messages.error(request, 'Miembro no encontrado')
+        return redirect('miembros')
     
     if request.method == 'POST':
         miembro.delete()
+        messages.success(request, 'Miembro eliminado correctamente.')
         return redirect('miembros')
 
     title = f'¿Deseas eliminar al miembro {miembro.get_name()}?'
