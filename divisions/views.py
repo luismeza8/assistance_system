@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse
@@ -95,6 +96,7 @@ def editar_subsistema(request, primary_key):
         form = SubsistemaForm(request.POST, instance=subsistema)
         if form.is_valid():
             form.save()
+            messages.success(request, 'yeap')
             return redirect('subsistemas')
 
     return render(request, 'divisions/subsistemas/formulario_subsistema_modal.html', {'form': form, 'url': f'/editar_subsistema/{primary_key}'})

@@ -1,0 +1,37 @@
+  {% if messages %}
+    {% for message in messages %}
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+        <div 
+          id='modal'
+          class='w-full h-full z-10 fixed flex justify-center'
+          style='background-color: rgba(0, 0, 0, 0.4); left: 0; top: 0;'>
+          <div class='p-8 flex flex-col items-center bg-white w-fit h-fit rounded-xl'
+            style='margin-top: 15vh;'>
+            <h1 class='font-bold text-2xl'>{{ message }}</h1>
+            <a onclick='deleteModal()'>Cerrar</a>
+          </div>
+        </div>
+      {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+        <div id='success-message' class='flex justify-center items-center w-2/6 h-14 bg-primary z-20 fixed left-[50%] translate-x-[-50%] bottom-6 rounded-2xl drop-shadow-xl'>
+          <div class='text-secondary'>{{ message }}</div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+<script>
+  (() => {
+    function deleteModal() {
+      const modal = document.getElementById('modal');
+      modal.remove();
+    }
+
+    if (document.getElementById('success-message') !== null) {
+      const successMessage = document.getElementById('success-message');
+      setTimeout(function(){
+        successMessage.remove();
+      }, 3000);
+    } else {
+      console.log('message not exits')
+    }
+  })();
+</script>
